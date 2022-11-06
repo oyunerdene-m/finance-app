@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export default function Login({ onLogin }) {
+export default function Login({ onLogin, errorMessage }) {
 	const [name, setName] = useState('');
 	const [password, setPassword] = useState('');
 
@@ -29,6 +29,7 @@ export default function Login({ onLogin }) {
 				</div>
 				<button>login</button>
 			</form>
+			<p>{errorMessage}</p>
 		</>
 	);
 }

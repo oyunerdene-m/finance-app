@@ -13,16 +13,27 @@ const DUMMY_USERS = [
 function App() {
 	const [users, setUsers] = useState(DUMMY_USERS);
 	const [currentUser, setCurrentUser] = useState();
+	const [errorMessage, setErrorMessage] = useState('');
 
+	console.log(currentUser);
 	function loginHandler(name, password) {
-		setCurrentUser({ name, password });
+		users.forEach((user) => {
+			if (user.name === name && user.password === password) {
+				setCurrentUser({ name, password });
+			} else {
+				setErrorMessage('Your name or password is incorrect!');
+			}
+		});
 	}
 
 	return (
 		<div className="App">
+			{currentUser ? (
+				<h1>Finance App</h1>
+			) : (
+				<Login onLogin={loginHandler} errorMessage={errorMessage} />
+			)}
 			<Navbar currentUser={currentUser} />
-			<h1>Finance App</h1>
-			<Login onLogin={loginHandler} />
 		</div>
 	);
 }
