@@ -1,14 +1,13 @@
 import './App.css';
-import { nanoid } from 'nanoid';
 import { useState } from 'react';
 import Login from './components/User/Login';
 import SignUp from './components/User/SignUp';
 import Navbar from './components/Header/Navbar';
 
 const DUMMY_USERS = [
-	{ id: nanoid(), name: 'Max', password: 'max123' },
-	{ id: nanoid(), name: 'Jenny', password: 'jenny456' },
-	{ id: nanoid(), name: 'Rupert', password: 'rupert789' },
+	{ id: Math.random().toString(), name: 'Max', password: 'max123' },
+	{ id: Math.random().toString(), name: 'Jenny', password: 'jenny456' },
+	{ id: Math.random().toString(), name: 'Rupert', password: 'rupert789' },
 ];
 
 function App() {
@@ -16,6 +15,8 @@ function App() {
 	const [currentUser, setCurrentUser] = useState();
 	const [errorMessage, setErrorMessage] = useState('');
 	const [isUser, setIsUser] = useState(false);
+
+	console.log(users);
 
 	console.log(users);
 	function loginHandler(name, password) {
@@ -30,7 +31,7 @@ function App() {
 
 	function signUpHandler(name, password) {
 		const newUser = {
-			id: nanoid(),
+			id: Math.random().toString(),
 			name: name,
 			password: password,
 		};
