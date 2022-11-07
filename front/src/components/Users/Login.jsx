@@ -30,7 +30,7 @@ export default function Login({ onLogin, errorMessage }) {
 					/>
 				</div>
 				<div style={{ marginBottom: '10px' }}>
-					<label htmlFor="username">password: </label>
+					<label htmlFor="password">password: </label>
 					<input
 						value={password}
 						onChange={passChangeHandler}

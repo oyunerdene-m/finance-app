@@ -32,7 +32,7 @@ export default function SignUp({ onSignUp }) {
 					/>
 				</div>
 				<div style={{ marginBottom: '10px' }}>
-					<label htmlFor="username">password: </label>
+					<label htmlFor="password">password: </label>
 					<input
 						value={newPass}
 						onChange={passChangeHandler}
