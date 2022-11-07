@@ -21,9 +21,9 @@ export default function CreateAccount(){
             <br/>
             <label htmlFor="currency">Currency</label>
             <select name="currency" id="currency">
-                <option value="euro">Euro</option>
-                <option value="dollar">Dollar</option>
-                <option value="tugrug">Tugrug</option>
+                <option value="€">Euro</option>
+                <option value="$">Dollar</option>
+                <option value="₮">Tugrug</option>
             </select>
         </form>
     )

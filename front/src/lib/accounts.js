@@ -4,7 +4,7 @@ const DUMMY_ACCOUNTS = [
 		name: 'My hudaldaa',
 		type: 'savings',
 		amount: 1000,
-		currency: 'euro',
+		currency: '€',
 		description: 'Mongol dans',
 	},
 	{
@@ -12,7 +12,7 @@ const DUMMY_ACCOUNTS = [
 		name: 'Degi wallet',
 		type: 'cash',
 		amount: 100,
-		currency: 'euro',
+		currency: '$',
 		description: 'degis money',
 	},
 	{
@@ -20,7 +20,7 @@ const DUMMY_ACCOUNTS = [
 		name: 'My haan',
 		type: 'loan',
 		amount: 80000,
-		currency: 'tugrug',
+		currency: '₮',
 		description: 'Bat-d',
 	},
 ];
