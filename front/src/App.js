@@ -9,7 +9,7 @@ import { getUsers, addUser } from './lib/userData';
 
 function App() {
 	const [users, setUsers] = useState(getUsers());
-	const [currentUser, setCurrentUser] = useState();
+	const [currentUser, setCurrentUser] = useState({ name: 'Max', password: 'max123' });
 	const [errorMessage, setErrorMessage] = useState('');
 	const [hideSignup, setHideSignup] = useState(false);
 
