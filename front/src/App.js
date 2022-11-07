@@ -14,7 +14,7 @@ function App() {
 	const [users, setUsers] = useState(DUMMY_USERS);
 	const [currentUser, setCurrentUser] = useState();
 	const [errorMessage, setErrorMessage] = useState('');
-	const [isUser, setIsUser] = useState(false);
+	const [hideSignup, setHideSignup] = useState(false);
 
 	console.log(users);
 
@@ -36,7 +36,7 @@ function App() {
 			password: password,
 		};
 		setUsers((prevUsers) => [...prevUsers, newUser]);
-		setIsUser(true);
+		setHideSignup(true);
 	}
 
 	return (
@@ -45,7 +45,7 @@ function App() {
 				<h1>Finance App</h1>
 			) : (
 				<>
-					{isUser ? (
+					{hideSignup ? (
 						<Login onLogin={loginHandler} errorMessage={errorMessage} />
 					) : (
 						<>
