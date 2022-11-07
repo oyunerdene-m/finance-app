@@ -31,13 +31,7 @@ function App() {
 	return (
 		<div className="App">
 			{currentUser ? (
-				<>
-					<Home />
-					<div>
-						{' '}
-						Hello, {currentUser.name} <a href="#.com">logout</a>
-					</div>
-				</>
+				<Home currentUser={currentUser} />
 			) : (
 				<>
 					<Login onLogin={loginHandler} errorMessage={errorMessage} />
