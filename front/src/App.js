@@ -38,14 +38,9 @@ function App() {
 				<h1>Finance App</h1>
 			) : (
 				<>
-					{hideSignup ? (
-						<Login onLogin={loginHandler} errorMessage={errorMessage} />
-					) : (
-						<>
-							<Login onLogin={loginHandler} errorMessage={errorMessage} />
-							<SignUp onSignUp={signUpHandler} />
-						</>
-					)}
+					<Login onLogin={loginHandler} errorMessage={errorMessage} />
+
+					{hideSignup ? null : <SignUp onSignUp={signUpHandler} />}
 				</>
 			)}
 			<Navbar currentUser={currentUser} />
