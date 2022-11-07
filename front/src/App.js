@@ -1,7 +1,7 @@
 import './App.css';
 import { useState } from 'react';
-import Login from './components/User/Login';
-import SignUp from './components/User/SignUp';
+import Login from './components/Users/Login';
+import SignUp from './components/Users/SignUp';
 import Home from './components/Pages/Home';
 import { getUsers, addUser } from './lib/userData';
 
@@ -51,7 +51,6 @@ function App() {
 	// 		<div>
 	// 			<nav>
 	// 				<ul>
-
 	// 					{currentUser ? (
 	// 						<li>
 	// 							<Navigate to="/" replace={true} />
