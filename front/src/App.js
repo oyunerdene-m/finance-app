@@ -2,8 +2,10 @@ import './App.css';
 import { useState } from 'react';
 import Login from './components/User/Login';
 import SignUp from './components/User/SignUp';
-import Navbar from './components/Header/Navbar';
+import Home from './components/Pages/Home';
 import { getUsers, addUser } from './lib/userData';
+
+//import { BrowserRouter as Router, Route, Link, Routes, Navigate } from 'react-router-dom';
 
 function App() {
 	const [users, setUsers] = useState(getUsers());
@@ -29,16 +31,56 @@ function App() {
 	return (
 		<div className="App">
 			{currentUser ? (
-				<h1>Finance App</h1>
+				<>
+					<Home />
+					<div>
+						{' '}
+						Hello, {currentUser.name} <a href="#.com">logout</a>
+					</div>
+				</>
 			) : (
 				<>
 					<Login onLogin={loginHandler} errorMessage={errorMessage} />
 					{hideSignup ? null : <SignUp onSignUp={signUpHandler} />}
 				</>
 			)}
-			<Navbar currentUser={currentUser} />
 		</div>
 	);
+	// return (
+	// 	<Router>
+	// 		<div>
+	// 			<nav>
+	// 				<ul>
+
+	// 					{currentUser ? (
+	// 						<li>
+	// 							<Navigate to="/" replace={true} />
+	// 							Hello, {currentUser.name} <a href="#.com">logout</a>
+	// 						</li>
+	// 					) : (
+	// 						<>
+	// 							<li>
+	// 								<Link to="/login">Login</Link>
+	// 							</li>
+	// 							<li>
+	// 								<Link to="/signup">Signup</Link>
+	// 							</li>
+	// 						</>
+	// 					)}
+	// 				</ul>
+	// 			</nav>
+
+	// 			<Routes>
+	// 				<Route path="/" element={<Home />} />
+	// 				<Route
+	// 					path="/login"
+	// 					element={<Login onLogin={loginHandler} errorMessage={errorMessage} />}
+	// 				/>
+	// 				<Route path="/signup" element={<SignUp onSignUp={signUpHandler} />} />
+	// 			</Routes>
+	// 		</div>
+	// 	</Router>
+	//);
 }
 
 export default App;
