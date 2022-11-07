@@ -3,22 +3,15 @@ import { useState } from 'react';
 import Login from './components/User/Login';
 import SignUp from './components/User/SignUp';
 import Navbar from './components/Header/Navbar';
-
-const DUMMY_USERS = [
-	{ id: Math.random().toString(), name: 'Max', password: 'max123' },
-	{ id: Math.random().toString(), name: 'Jenny', password: 'jenny456' },
-	{ id: Math.random().toString(), name: 'Rupert', password: 'rupert789' },
-];
+import { getUsers, addUser } from './lib/userData';
 
 function App() {
-	const [users, setUsers] = useState(DUMMY_USERS);
+	const [users, setUsers] = useState(getUsers());
 	const [currentUser, setCurrentUser] = useState();
 	const [errorMessage, setErrorMessage] = useState('');
 	const [hideSignup, setHideSignup] = useState(false);
-
 	console.log(users);
 
-	console.log(users);
 	function loginHandler(name, password) {
 		users.forEach((user) => {
 			if (user.name === name && user.password === password) {
@@ -30,12 +23,12 @@ function App() {
 	}
 
 	function signUpHandler(name, password) {
-		const newUser = {
-			id: Math.random().toString(),
-			name: name,
-			password: password,
-		};
-		setUsers((prevUsers) => [...prevUsers, newUser]);
+		// const newUser = {
+		// 	id: Math.random().toString(),
+		// 	name: name,
+		// 	password: password,
+		// };
+		setUsers(addUser(name, password));
 		setHideSignup(true);
 	}
 
