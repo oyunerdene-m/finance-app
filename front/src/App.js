@@ -10,7 +10,6 @@ function App() {
 	const [currentUser, setCurrentUser] = useState();
 	const [errorMessage, setErrorMessage] = useState('');
 	const [hideSignup, setHideSignup] = useState(false);
-	console.log(users);
 
 	function loginHandler(name, password) {
 		users.forEach((user) => {
