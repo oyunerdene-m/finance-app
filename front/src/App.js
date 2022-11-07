@@ -23,11 +23,6 @@ function App() {
 	}
 
 	function signUpHandler(name, password) {
-		// const newUser = {
-		// 	id: Math.random().toString(),
-		// 	name: name,
-		// 	password: password,
-		// };
 		setUsers(addUser(name, password));
 		setHideSignup(true);
 	}
@@ -39,7 +34,6 @@ function App() {
 			) : (
 				<>
 					<Login onLogin={loginHandler} errorMessage={errorMessage} />
-
 					{hideSignup ? null : <SignUp onSignUp={signUpHandler} />}
 				</>
 			)}
