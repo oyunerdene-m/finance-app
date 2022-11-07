@@ -22,22 +22,22 @@ export default function SignUp({ onSignUp }) {
 			<h4>Create Account</h4>
 			<form onSubmit={submitHandler}>
 				<div style={{ marginBottom: '5px' }}>
-					<label htmlFor="username">username: </label>
+					<label htmlFor="name">username: </label>
 					<input
 						value={newName}
 						onChange={nameChangeHandler}
 						type="text"
-						id="username"
+						id="name"
 						name="username"
 					/>
 				</div>
 				<div style={{ marginBottom: '10px' }}>
-					<label htmlFor="password">password: </label>
+					<label htmlFor="pass">password: </label>
 					<input
 						value={newPass}
 						onChange={passChangeHandler}
 						type="password"
-						id="password"
+						id="pass"
 						name="password"
 					/>
 				</div>
