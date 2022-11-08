@@ -30,14 +30,10 @@ export default function CreateAccount({onAddAccount, onCloseForm}){
         }
         onAddAccount(accountData)
     }
-
-    function closeHandler(event){
-        event.stopPropagation()
-        onCloseForm()
-    }
+  
     return (
         <form onSubmit={submitHandler} className={classes.form}>
-            <span onClick={closeHandler} className={classes.close}>X</span>
+            <span onClick={onCloseForm} className={classes.close}>X</span>
             <div>
                 <label htmlFor="name">Account name:</label>
                 <input value={accountData.name} onChange={changeHandler} type="text" id="name" name="name"/>
