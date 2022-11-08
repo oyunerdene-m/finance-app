@@ -6,7 +6,16 @@ import CreateAccount from '../Accounts/CreateAccount';
 export default function Home({currentUser}) {
     const [accounts, setAccounts] = useState(getAccounts());
     const [showAccounts, setShowAccounts] = useState(false);
-    const [isFormShow, setIsFormShow] = useState(false)
+    const [isFormShow, setIsFormShow] = useState(false);
+
+    function addAccountHandler(accountData){
+        const newAccountData = {
+            ...accountData,
+            id: Math.random().toString()
+        }
+        setAccounts(prevAccounts=>[...prevAccounts, newAccountData])
+        setIsFormShow(false)
+    }
 
     return (
     <>
@@ -18,7 +27,7 @@ export default function Home({currentUser}) {
         </div>
         <div>
             {isFormShow ? '': <button onClick={()=>setIsFormShow(true)}>Add Account</button>}
-            {isFormShow && <CreateAccount/>}
+            {isFormShow && <CreateAccount onAddAccount={addAccountHandler}/>}
         </div>
     </>)
     

@@ -2,7 +2,7 @@ import {useState} from 'react';
 import classes from './CreateAccount.module.css'
 
 
-export default function CreateAccount(){
+export default function CreateAccount({onAddAccount}){
     const [accountData, setAccountData] = useState(
         {
             name: '',
@@ -12,27 +12,39 @@ export default function CreateAccount(){
             currency: ''
         }
     )
+    
+    function changeHandler(event){
+        const {name, value} = event.target;
+        setAccountData(prevAccountData=>{
+            return {
+                ...prevAccountData,
+                [name]: value
+            }
+        })
+    }
 
-    function changeHandler(e){
-        console.log(e.target)
+    function submitHandler(e){
+        e.preventDefault();
+        onAddAccount(accountData)
     }
     return (
-        <form className={classes.form}>
+        <form onSubmit={submitHandler} className={classes.form}>
             <div>
                 <label htmlFor="name">Account name:</label>
-                <input onChange={changeHandler} type="text" id="name" name="name"/>
+                <input value={accountData.name} onChange={changeHandler} type="text" id="name" name="name"/>
             </div>
             <div>
                 <label htmlFor="amount">Amount:</label>
-                <input onChange={changeHandler} type="number" id="amount" name="amount"/>
+                <input value={accountData.amount} onChange={changeHandler} type="number" id="amount" name="amount"/>
             </div>
             <div>
                 <label htmlFor="description">Description:</label>
-                <input onChange={changeHandler} type="text" id="description" name="description"/>
+                <input value={accountData.description} onChange={changeHandler} type="text" id="description" name="description"/>
             </div>
             <div>
                 <label htmlFor="type">Type:</label>
-                <select onChange={changeHandler} name="type" id="type">
+                <select value={accountData.type} onChange={changeHandler} name="type" id="type">
+                    <option value="">Choose type</option>
                     <option value="cash">Cash</option>
                     <option value="card">Card</option>
                     <option value="savings">Savings</option>
@@ -42,7 +54,8 @@ export default function CreateAccount(){
             </div>
             <div>
                 <label htmlFor="currency">Currency:</label>
-                <select onChange={changeHandler} name="currency" id="currency">
+                <select value={accountData.currency} onChange={changeHandler} name="currency" id="currency">
+                    <option value="">Choose currency</option>
                     <option value="€">Euro</option>
                     <option value="$">Dollar</option>
                     <option value="₮">Tugrug</option>
