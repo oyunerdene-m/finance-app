@@ -17,6 +17,10 @@ export default function Home({currentUser}) {
         setIsFormShow(false)
     }
 
+    function closeHandler(){
+        setIsFormShow(false);
+    }
+
     return (
     <>
         <h1>Finance App</h1>
@@ -27,7 +31,7 @@ export default function Home({currentUser}) {
         </div>
         <div>
             {isFormShow ? '': <button onClick={()=>setIsFormShow(true)}>Add Account</button>}
-            {isFormShow && <CreateAccount onAddAccount={addAccountHandler}/>}
+            {isFormShow && <CreateAccount onAddAccount={addAccountHandler} onCloseForm={closeHandler}/>}
         </div>
     </>)
     
