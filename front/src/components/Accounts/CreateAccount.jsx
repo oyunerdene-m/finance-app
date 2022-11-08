@@ -25,6 +25,9 @@ export default function CreateAccount({onAddAccount}){
 
     function submitHandler(e){
         e.preventDefault();
+        if(accountData.name.trim().length === 0 || accountData.amount.length === 0){
+            return;
+        }
         onAddAccount(accountData)
     }
     return (

@@ -7,6 +7,8 @@ export default function Account(props){
         <h4>{name} - {type}</h4>
         <p>balance: {currency}{amount} </p>
         <p style={{fontStyle: 'italic'}}>description: {description}</p>
+        <button>edit</button>
+        <button>delete</button>
     </li>
  )
 }
