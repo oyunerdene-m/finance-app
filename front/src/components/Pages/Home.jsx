@@ -6,7 +6,7 @@ export default function Home({currentUser}) {
     const [accounts, setAccounts] = useState(getAccounts());
     const [showAccounts, setShowAccounts] = useState(false)
 
-	return (
+    return (
     <>
         <h1>Finance App</h1>
         <div style={{marginBottom: "10px"}}>  Hello, {currentUser.name} <a href="#.com">logout</a></div>

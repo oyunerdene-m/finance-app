@@ -1,17 +1,19 @@
+import {useState} from 'react';
 export default function CreateAccount(){
+
     return (
         <form>
             <label htmlFor="name">Account name:</label>
-            <input type="text" id="name" name="name"/>
+            <input onChange={changeHandler} type="text" id="name" name="name"/>
             <br/>
             <label htmlFor="amount">Amount</label>
-            <input type="number" id="amount" name="amount"/>
+            <input onChange={changeHandler} type="number" id="amount" name="amount"/>
             <br/>
             <label htmlFor="description">Description</label>
-            <input type="text" id="description" name="description"/>
+            <input onChange={changeHandler} type="text" id="description" name="description"/>
             <br/>
             <label htmlFor="type">Type</label>
-            <select name="type" id="type">
+            <select onChange={changeHandler} name="type" id="type">
                 <option value="cash">Cash</option>
                 <option value="card">Card</option>
                 <option value="savings">Savings</option>
@@ -20,7 +22,7 @@ export default function CreateAccount(){
             </select>
             <br/>
             <label htmlFor="currency">Currency</label>
-            <select name="currency" id="currency">
+            <select onChange={changeHandler} name="currency" id="currency">
                 <option value="€">Euro</option>
                 <option value="$">Dollar</option>
                 <option value="₮">Tugrug</option>

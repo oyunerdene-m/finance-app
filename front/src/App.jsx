@@ -41,38 +41,38 @@ function App() {
 		</div>
 	);
 	// return (
-	// 	<Router>
-	// 		<div>
-	// 			<nav>
-	// 				<ul>
-	// 					{currentUser ? (
-	// 						<li>
-	// 							<Navigate to="/" replace={true} />
-	// 							Hello, {currentUser.name} <a href="#.com">logout</a>
-	// 						</li>
-	// 					) : (
-	// 						<>
-	// 							<li>
-	// 								<Link to="/login">Login</Link>
-	// 							</li>
-	// 							<li>
-	// 								<Link to="/signup">Signup</Link>
-	// 							</li>
-	// 						</>
-	// 					)}
-	// 				</ul>
-	// 			</nav>
+	//     <Router>
+	//         <div>
+	//             <nav>
+	//                 <ul>
+	//                     {currentUser ? (
+	//                         <li>
+	//                             <Navigate to="/" replace={true} />
+	//                             Hello, {currentUser.name} <a href="#.com">logout</a>
+	//                         </li>
+	//                     ) : (
+	//                         <>
+	//                             <li>
+	//                                 <Link to="/login">Login</Link>
+	//                             </li>
+	//                             <li>
+	//                                 <Link to="/signup">Signup</Link>
+	//                             </li>
+	//                         </>
+	//                     )}
+	//                 </ul>
+	//             </nav>
 
-	// 			<Routes>
-	// 				<Route path="/" element={<Home />} />
-	// 				<Route
-	// 					path="/login"
-	// 					element={<Login onLogin={loginHandler} errorMessage={errorMessage} />}
-	// 				/>
-	// 				<Route path="/signup" element={<SignUp onSignUp={signUpHandler} />} />
-	// 			</Routes>
-	// 		</div>
-	// 	</Router>
+	//             <Routes>
+	//                 <Route path="/" element={<Home />} />
+	//                 <Route
+	//                     path="/login"
+	//                     element={<Login onLogin={loginHandler} errorMessage={errorMessage} />}
+	//                 />
+	//                 <Route path="/signup" element={<SignUp onSignUp={signUpHandler} />} />
+	//             </Routes>
+	//         </div>
+	//     </Router>
 	//);
 }
 
