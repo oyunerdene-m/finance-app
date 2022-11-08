@@ -1,10 +1,12 @@
 import {useState} from 'react';
 import { getAccounts } from '../../lib/accounts';
 import AccountList from '../Accounts/AccountList';
+import CreateAccount from '../Accounts/CreateAccount';
 
 export default function Home({currentUser}) {
     const [accounts, setAccounts] = useState(getAccounts());
-    const [showAccounts, setShowAccounts] = useState(false)
+    const [showAccounts, setShowAccounts] = useState(false);
+    const [isFormShow, setIsFormShow] = useState(false)
 
     return (
     <>
@@ -15,7 +17,8 @@ export default function Home({currentUser}) {
             {showAccounts && <AccountList accounts={accounts}/>}
         </div>
         <div>
-            <button>Add Account</button>
+            {isFormShow ? '': <button onClick={()=>setIsFormShow(true)}>Add Account</button>}
+            {isFormShow && <CreateAccount/>}
         </div>
     </>)
     
