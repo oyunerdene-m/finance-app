@@ -63,7 +63,7 @@ export default function Home({currentUser}) {
         <div>
             {isFormShow ? '': <button onClick={()=>setIsFormShow(true)}>Add Account</button>}
             {isFormShow && <CreateAccount onAddAccount={addAccountHandler} onCloseForm={closeHandler}/>}
-            {isEditing && <EditAccount account= {editedAccount} onEditAccount={editAccountHandler}/>}
+            {isEditing && <EditAccount account= {editedAccount} onEditAccount={editAccountHandler} onCancel={()=>setIsEditing(false)}/>}
         </div>
     </>)
     
