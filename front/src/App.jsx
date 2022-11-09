@@ -5,11 +5,11 @@ import SignUp from './components/Users/SignUp';
 import Home from './components/Pages/Home';
 import { getUsers, addUser } from './lib/userData';
 
-import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Routes, Navigate } from 'react-router-dom';
 
 function App() {
 	const [users, setUsers] = useState(getUsers());
-	const [currentUser, setCurrentUser] = useState({name: 'Max', password: 'max123'});
+	const [currentUser, setCurrentUser] = useState(null);
 	const [errorMessage, setErrorMessage] = useState("");
 	const [hideSignup, setHideSignup] = useState(false);
 
@@ -28,43 +28,26 @@ function App() {
 		setHideSignup(true);
 	}
 
-	// return (
-	// 	<div className="App">
-	// 		{currentUser ? (
-	// 			<Home currentUser={currentUser} />
-	// 		) : (
-	// 			<>
-	// 				<Login onLogin={loginHandler} errorMessage={errorMessage} />
-	// 				{hideSignup ? null : <SignUp onSignUp={signUpHandler} />}
-	// 			</>
-	// 		)}
-	// 	</div>
-	// );
 	return (
 	    <Router >
 	        <div className="App">
 	            <nav>
 	                <ul>
-	                    {currentUser ? (
-	                        <h2>Home</h2>
-	                    ) : (
+                        {currentUser ? <h1>This is home</h1> :
 	                        <>
 	                            <li>
 	                                <Link to="/login">Login</Link>
 	                            </li>
                                 {hideSignup ? null : <li><Link to="/signup">Signup</Link></li>}
 	                        </>
-	                    )}
+	                    }
 	                </ul>
 	            </nav>
 
 	            <Routes>
-	                <Route path="/" element={<Home currentUser={currentUser}/>} />
-	                <Route
-	                    path="/login"
-	                    element={<Login onLogin={loginHandler} errorMessage={errorMessage} currentUser={currentUser}/>}
-	                />
-	                <Route path="/signup" element={<SignUp onSignUp={signUpHandler} />} />
+                    <Route path="/" element={!currentUser ? <Navigate to="/login" replace={true}/> : <Home currentUser={currentUser}/>}/>
+                    <Route path="/login" element={currentUser ? <Navigate to="/" replace={true}/> : <Login onLogin={loginHandler} errorMessage={errorMessage} currentUser={currentUser}/>}/>
+                    <Route path="/signup" element={hideSignup ? null : <SignUp onSignUp={signUpHandler} />}/>
 	            </Routes>
 	        </div>
 	    </Router>

@@ -3,6 +3,8 @@ import { getAccounts } from '../../lib/accounts';
 import AccountList from '../Accounts/AccountList';
 import CreateAccount from '../Accounts/CreateAccount';
 import EditAccount from '../Accounts/EditAccount';
+import { Navigate } from 'react-router-dom';
+
 
 export default function Home({currentUser}) {
     const [accounts, setAccounts] = useState(getAccounts());
@@ -58,6 +60,8 @@ export default function Home({currentUser}) {
     return (
     <>
         <h1>Finance App</h1>
+        {currentUser === null && <Navigate to="/login" replace={true} />}
+
         <div style={{marginBottom: "10px"}}>  Hello, {currentUser.name} <a href="#.com">logout</a></div>
         <div>
             <button onClick={()=>setShowAccounts(!showAccounts)}>{showAccounts ? "Hide": "Show"} accounts</button>
