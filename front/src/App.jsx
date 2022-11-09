@@ -6,6 +6,7 @@ import Home from './components/Pages/Home';
 import { getUsers, addUser } from './lib/userData';
 
 import { BrowserRouter as Router, Route, Link, Routes, Navigate } from 'react-router-dom';
+import Transactions from './components/Transactions/Transactions';
 
 function App() {
 	const [users, setUsers] = useState(getUsers());
@@ -33,7 +34,7 @@ function App() {
 	        <div className="App">
 	            <nav>
 	                <ul>
-                        {currentUser ? <h1>This is home</h1> :
+                        {currentUser ? "" :
 	                        <>
 	                            <li>
 	                                <Link to="/login">Login</Link>
@@ -48,6 +49,7 @@ function App() {
                     <Route path="/" element={!currentUser ? <Navigate to="/login" replace={true}/> : <Home currentUser={currentUser}/>}/>
                     <Route path="/login" element={currentUser ? <Navigate to="/" replace={true}/> : <Login onLogin={loginHandler} errorMessage={errorMessage} currentUser={currentUser}/>}/>
                     <Route path="/signup" element={hideSignup ? null : <SignUp onSignUp={signUpHandler} />}/>
+                    <Route path="/transactions" element={<Transactions/>}/>
 	            </Routes>
 	        </div>
 	    </Router>
