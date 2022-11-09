@@ -5,12 +5,12 @@ import SignUp from './components/Users/SignUp';
 import Home from './components/Pages/Home';
 import { getUsers, addUser } from './lib/userData';
 
-//import { BrowserRouter as Router, Route, Link, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
 
 function App() {
 	const [users, setUsers] = useState(getUsers());
-	const [currentUser, setCurrentUser] = useState({ name: 'Max', password: 'max123' });
-	const [errorMessage, setErrorMessage] = useState('');
+	const [currentUser, setCurrentUser] = useState({name: 'Max', password: 'max123'});
+	const [errorMessage, setErrorMessage] = useState("");
 	const [hideSignup, setHideSignup] = useState(false);
 
 	function loginHandler(name, password) {
@@ -28,52 +28,47 @@ function App() {
 		setHideSignup(true);
 	}
 
-	return (
-		<div className="App">
-			{currentUser ? (
-				<Home currentUser={currentUser} />
-			) : (
-				<>
-					<Login onLogin={loginHandler} errorMessage={errorMessage} />
-					{hideSignup ? null : <SignUp onSignUp={signUpHandler} />}
-				</>
-			)}
-		</div>
-	);
 	// return (
-	//     <Router>
-	//         <div>
-	//             <nav>
-	//                 <ul>
-	//                     {currentUser ? (
-	//                         <li>
-	//                             <Navigate to="/" replace={true} />
-	//                             Hello, {currentUser.name} <a href="#.com">logout</a>
-	//                         </li>
-	//                     ) : (
-	//                         <>
-	//                             <li>
-	//                                 <Link to="/login">Login</Link>
-	//                             </li>
-	//                             <li>
-	//                                 <Link to="/signup">Signup</Link>
-	//                             </li>
-	//                         </>
-	//                     )}
-	//                 </ul>
-	//             </nav>
+	// 	<div className="App">
+	// 		{currentUser ? (
+	// 			<Home currentUser={currentUser} />
+	// 		) : (
+	// 			<>
+	// 				<Login onLogin={loginHandler} errorMessage={errorMessage} />
+	// 				{hideSignup ? null : <SignUp onSignUp={signUpHandler} />}
+	// 			</>
+	// 		)}
+	// 	</div>
+	// );
+	return (
+	    <Router >
+	        <div className="App">
+	            <nav>
+	                <ul>
+	                    {currentUser ? (
+	                        <h2>Home</h2>
+	                    ) : (
+	                        <>
+	                            <li>
+	                                <Link to="/login">Login</Link>
+	                            </li>
+                                {hideSignup ? null : <li><Link to="/signup">Signup</Link></li>}
+	                        </>
+	                    )}
+	                </ul>
+	            </nav>
 
-	//             <Routes>
-	//                 <Route path="/" element={<Home />} />
-	//                 <Route
-	//                     path="/login"
-	//                     element={<Login onLogin={loginHandler} errorMessage={errorMessage} />}
-	//                 />
-	//                 <Route path="/signup" element={<SignUp onSignUp={signUpHandler} />} />
-	//             </Routes>
-	//         </div>
-	//     </Router>
-	//);
+	            <Routes>
+	                <Route path="/" element={<Home currentUser={currentUser}/>} />
+	                <Route
+	                    path="/login"
+	                    element={<Login onLogin={loginHandler} errorMessage={errorMessage} currentUser={currentUser}/>}
+	                />
+	                <Route path="/signup" element={<SignUp onSignUp={signUpHandler} />} />
+	            </Routes>
+	        </div>
+	    </Router>
+	);
 }
 
 export default App;

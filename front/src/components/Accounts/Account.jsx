@@ -8,7 +8,7 @@ export default function Account(props){
         <p>balance: {currency}{amount} </p>
         <p style={{fontStyle: 'italic'}}>description: {description}</p>
         <button onClick={()=>props.onEditing(id)} >edit</button>
-        <button>delete</button>
+        <button onClick={()=>props.onDelete(id)}>delete</button>
     </li>
  )
 }

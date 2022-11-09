@@ -12,7 +12,7 @@ export default function EditAccount({account, onEditAccount, onCancel}){
 
     function changeHandler(event){
         const {name, value} = event.target;
-        setEditedAccount(prevAccountData=>{
+        setEditedAccount(prevAccountData => {
             return {
                 ...prevAccountData,
                 [name]: value

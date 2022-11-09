@@ -50,7 +50,10 @@ export default function Home({currentUser}) {
         }))
         setIsEditing(false)
     }
-  
+    
+    function deleteAccountHandler(id){
+        setAccounts(prevAccounts=>prevAccounts.filter(account=>account.id !== id));
+    }
 
     return (
     <>
@@ -58,7 +61,7 @@ export default function Home({currentUser}) {
         <div style={{marginBottom: "10px"}}>  Hello, {currentUser.name} <a href="#.com">logout</a></div>
         <div>
             <button onClick={()=>setShowAccounts(!showAccounts)}>{showAccounts ? "Hide": "Show"} accounts</button>
-            {showAccounts && <AccountList accounts={accounts} onEditing={editAccount}/>}
+            {showAccounts && <AccountList accounts={accounts} onEditing={editAccount} onDelete={deleteAccountHandler}/>}
         </div>
         <div>
             {isFormShow ? '': <button onClick={()=>setIsFormShow(true)}>Add Account</button>}
