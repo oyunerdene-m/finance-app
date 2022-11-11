@@ -1,3 +1,5 @@
+import {Link} from 'react-router-dom';
+
 export default function Transactions(){
     return (
         <div>
@@ -5,7 +7,7 @@ export default function Transactions(){
             <div>
                 <button>Income</button>
                 <button>Expense</button>
-                <button>Transfer</button>
+                <Link to="/transactions/transfer">Transfer</Link>
             </div>
         </div>
     )

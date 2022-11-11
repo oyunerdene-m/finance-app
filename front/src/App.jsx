@@ -7,6 +7,7 @@ import { getUsers, addUser } from './lib/userData';
 
 import { BrowserRouter as Router, Route, Link, Routes, Navigate } from 'react-router-dom';
 import Transactions from './components/Transactions/Transactions';
+import Transfer from './components/Transactions/Transfer';
 
 function App() {
 	const [users, setUsers] = useState(getUsers());
@@ -50,6 +51,7 @@ function App() {
                     <Route path="/login" element={currentUser ? <Navigate to="/" replace={true}/> : <Login onLogin={loginHandler} errorMessage={errorMessage} currentUser={currentUser}/>}/>
                     <Route path="/signup" element={hideSignup ? null : <SignUp onSignUp={signUpHandler} />}/>
                     <Route path="/transactions" element={<Transactions/>}/>
+                    <Route path="/transactions/transfer" element={<Transfer/>}/>
 	            </Routes>
 	        </div>
 	    </Router>
