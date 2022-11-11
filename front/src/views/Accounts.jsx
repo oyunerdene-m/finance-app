@@ -1,11 +1,11 @@
 import {useState} from 'react';
-import { getAccounts } from '../../lib/accounts';
-import AccountList from '../Accounts/AccountList';
-import CreateAccount from '../Accounts/CreateAccount';
-import EditAccount from '../Accounts/EditAccount';
+import { getAccounts } from '../lib/accounts';
+import AccountList from '../components/Accounts/AccountList';
+import CreateAccount from '../components/Accounts/CreateAccount';
+import EditAccount from '../components/Accounts/EditAccount';
 import {Link} from 'react-router-dom';
 
-export default function Home({currentUser}) {
+export default function Accounts() {
     const [accounts, setAccounts] = useState(getAccounts());
     const [showAccounts, setShowAccounts] = useState(false);
     const [isFormShow, setIsFormShow] = useState(false);
@@ -58,20 +58,18 @@ export default function Home({currentUser}) {
 
     return (
     <>
-        <h1>Finance App</h1>
-
-        <div style={{marginBottom: "10px"}}>  Hello, {currentUser.name} <a href="#.com">logout</a></div>
+        <Link to="/">Home</Link>
         <div>
             <button onClick={()=>setShowAccounts(!showAccounts)}>{showAccounts ? "Hide": "Show"} accounts</button>
-                <div>
-                    <Link to="/transactions">Transactions</Link>
-                </div>
             {showAccounts && <AccountList accounts={accounts} onEditing={editAccount} onDelete={deleteAccountHandler}/>}
         </div>
         <div>
             {isFormShow ? '': <button onClick={()=>setIsFormShow(true)}>Add Account</button>}
             {isFormShow && <CreateAccount onAddAccount={addAccountHandler} onCloseForm={closeHandler}/>}
             {isEditing && <EditAccount account= {editedAccount} onEditAccount={editAccountHandler} onCancel={()=>setIsEditing(false)}/>}
+        </div>
+        <div>
+            <Link to="/transactions">Transactions</Link>
         </div>
     </>)
     

@@ -2,11 +2,12 @@ import './App.css';
 import { useState } from 'react';
 import Login from './components/Users/Login';
 import SignUp from './components/Users/SignUp';
-import Home from './components/Pages/Home';
+import Home from './views/Home';
+import Accounts from './views/Accounts';
 import { getUsers, addUser } from './lib/userData';
 
 import { BrowserRouter as Router, Route, Link, Routes, Navigate } from 'react-router-dom';
-import Transactions from './components/Transactions/Transactions';
+import Transactions from './views/Transactions';
 import Transfer from './components/Transactions/Transfer';
 
 function App() {
@@ -35,7 +36,7 @@ function App() {
 	        <div className="App">
 	            <nav>
 	                <ul>
-                        {currentUser ? "" :
+                        {currentUser ? <div style={{marginBottom: "10px"}}>  Hello, {currentUser.name} <a href="#.com">logout</a></div>:
 	                        <>
 	                            <li>
 	                                <Link to="/login">Login</Link>
@@ -47,9 +48,11 @@ function App() {
 	            </nav>
 
 	            <Routes>
-                    <Route path="/" element={!currentUser ? <Navigate to="/login" replace={true}/> : <Home currentUser={currentUser}/>}/>
                     <Route path="/login" element={currentUser ? <Navigate to="/" replace={true}/> : <Login onLogin={loginHandler} errorMessage={errorMessage} currentUser={currentUser}/>}/>
                     <Route path="/signup" element={hideSignup ? null : <SignUp onSignUp={signUpHandler} />}/>
+
+                    <Route path="/" element={!currentUser ? <Navigate to="/login" replace={true}/> : <Home />}/>
+                    <Route path="/accounts" element={<Accounts/>}/>
                     <Route path="/transactions" element={<Transactions/>}/>
                     <Route path="/transactions/transfer" element={<Transfer/>}/>
 	            </Routes>
