@@ -5,7 +5,11 @@ const DUMMY_USERS = [
 ];
 
 function getUsers() {
-	return DUMMY_USERS;
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve(DUMMY_USERS);
+		}, 1000);
+	});
 }
 
 function addUser(name, password) {
@@ -14,7 +18,14 @@ function addUser(name, password) {
 		name: name,
 		password: password,
 	};
-	return [...getUsers(), newUser];
+
+	DUMMY_USERS.push(newUser);
+
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve(true);
+		}, 1000);
+	});
 }
 
 export { getUsers, addUser };

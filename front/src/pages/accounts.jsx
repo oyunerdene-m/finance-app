@@ -1,31 +1,45 @@
 import {useState} from 'react';
-import { getAccounts } from '../lib/accounts';
+import { getAccounts, addAccount, editAccount } from '../lib/accountData';
 import AccountList from '../components/Accounts/AccountList';
 import CreateAccount from '../components/Accounts/CreateAccount';
 import EditAccount from '../components/Accounts/EditAccount';
 import {Link} from 'react-router-dom';
+import { useEffect } from 'react';
 
 export default function Accounts() {
-    const [accounts, setAccounts] = useState(getAccounts());
+    const [accounts, setAccounts] = useState([]);
     const [showAccounts, setShowAccounts] = useState(false);
     const [isFormShow, setIsFormShow] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
-    const [editedAccount, setEditedAccount] = useState()
+    const [editedAccount, setEditedAccount] = useState();
 
-    function addAccountHandler(accountData){
-        const newAccountData = {
-            ...accountData,
-            id: Math.random().toString()
+    useEffect(() => {
+        console.log('useeffec')
+        async function fetchData() {
+          const response = await getAccounts();
+          setAccounts(response)
         }
-        setAccounts(prevAccounts=>[...prevAccounts, newAccountData])
+        fetchData();
+      }, []); 
+    console.log(accounts)
+
+    async function addAccountHandler(accountData){
+        console.log(accountData)
+
+        const addedAccount = await addAccount(accountData);
+        console.log(addedAccount)
+        setAccounts(prevAccounts => [...prevAccounts, addedAccount])
+        console.log(accounts)
         setIsFormShow(false)
     }
+    console.log(accounts)
+
 
     function closeHandler(){
         setIsFormShow(false);
     }
 
-    function editAccount(id){
+    function editingAccount(id){
         setIsEditing(true)
         accounts.forEach(account => {
             if(account.id === id){
@@ -34,7 +48,10 @@ export default function Accounts() {
         });
     }
 
-    function editAccountHandler(id, editedAccountData){
+    async function editAccountHandler(id, editedAccountData){
+        // const updatedAccounts = await editAccount(id, editedAccountData)
+        // setAccounts(updatedAccounts)
+
         setAccounts(prevAccounts => prevAccounts.map(account=>{
             if(account.id === id){
                 return {
@@ -61,7 +78,7 @@ export default function Accounts() {
         <Link to="/">Home</Link>
         <div>
             <button onClick={()=>setShowAccounts(!showAccounts)}>{showAccounts ? "Hide": "Show"} accounts</button>
-            {showAccounts && <AccountList accounts={accounts} onEditing={editAccount} onDelete={deleteAccountHandler}/>}
+            {showAccounts && <AccountList accounts={accounts} onEditing={editingAccount} onDelete={deleteAccountHandler}/>}
         </div>
         <div>
             {isFormShow ? '': <button onClick={()=>setIsFormShow(true)}>Add Account</button>}
