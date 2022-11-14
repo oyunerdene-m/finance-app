@@ -7,7 +7,7 @@ const DUMMY_USERS = [
 function getUsers() {
 	return new Promise((resolve) => {
 		setTimeout(() => {
-			resolve(DUMMY_USERS);
+			resolve([...DUMMY_USERS]);
 		}, 1000);
 	});
 }
