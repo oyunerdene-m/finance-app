@@ -1,3 +1,18 @@
-export default function TransactionList() {
-	return <ul></ul>;
+import TransactionItem from './TransactionItem';
+
+export default function TransactionList({ transactions }) {
+	return (
+		<ul
+			style={{
+				border: '1px solid teal',
+				width: '30%',
+				margin: '0 auto',
+				padding: '10px 10px',
+			}}
+		>
+			{transactions.map((transaction) => (
+				<TransactionItem key={transaction.id} transaction={transaction} />
+			))}
+		</ul>
+	);
 }
