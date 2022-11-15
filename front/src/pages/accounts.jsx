@@ -83,7 +83,7 @@ export default function Accounts() {
 				)}
 			</div>
 			<div>
-				<Link to='/transactions'>Transactions</Link>
+				<Link to='/transactions/new'>New transaction</Link>
 			</div>
 		</>
 	);

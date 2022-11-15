@@ -5,9 +5,7 @@ import SignUp from './components/Users/SignUp';
 import Home from './pages/home';
 import Accounts from './pages/accounts';
 import Transactions from './pages/transactions';
-import Transfer from './components/Transactions/Transfer';
-import Income from './components/Transactions/Income';
-import Expense from './components/Transactions/Expense';
+import NewTransaction from './components/Transactions/NewTransaction/NewTransaction';
 import { getUsers, addUser } from './lib/userData';
 import { BrowserRouter as Router, Route, Link, Routes, Navigate } from 'react-router-dom';
 
@@ -91,9 +89,7 @@ function App() {
 					/>
 					<Route path='/accounts' element={<Accounts />} />
 					<Route path='/transactions' element={<Transactions />} />
-					{/* <Route path='/transactions/transfer' element={<Transfer />} />
-					<Route path='/transactions/income' element={<Income />} />
-					<Route path='/transactions/expense' element={<Expense />} /> */}
+					<Route path='/transactions/new' element={<NewTransaction />} />
 				</Routes>
 			</div>
 		</Router>
