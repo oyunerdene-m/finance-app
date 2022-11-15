@@ -49,8 +49,12 @@ async function login(email: string, password: string) {
 
   const user = users.find((u) => u.email === email);
 
-  if (!user || !user.hashedPassword) {
+  if (!user) {
     throw new Error('Invalid email or password');
+  }
+
+  if (!user.hashedPassword) {
+    throw new Error('User has no password');
   }
 
   const passwordMatches = await comparePassword(password, user.hashedPassword);
