@@ -49,6 +49,13 @@ function addAccount(accountData) {
 
 function editAccount(id, accountData) {
 	let foundAccount = DUMMY_ACCOUNTS.find((account) => account.id === id);
+	if (!foundAccount) {
+		return new Promise((resolve) => {
+			setTimeout(() => {
+				resolve(null);
+			}, 500);
+		});
+	}
 	foundAccount = {
 		...foundAccount,
 		name: accountData.name,

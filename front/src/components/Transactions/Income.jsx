@@ -1,21 +1,21 @@
 import classes from './TransactionForm.module.css';
 
-export default function Transfer() {
+export default function Income() {
 	return (
 		<div className={classes.transfer}>
-			<h3>Transfer between accounts</h3>
+			<h3>Income</h3>
 			<form>
 				<div>
 					<label htmlFor='date'>Date: </label>
 					<input type='date' name='date' id='date' />
 				</div>
 				<div>
-					<label htmlFor='from'>From: </label>
-					<input type='text' name='from' id='from' />
+					<label htmlFor='account'>Account: </label>
+					<input type='text' name='account' id='accoount' />
 				</div>
 				<div>
-					<label htmlFor='to'>To: </label>
-					<input type='text' name='to' id='to' />
+					<label htmlFor='category'>Category: </label>
+					<input type='text' name='category' id='category' />
 				</div>
 				<div>
 					<label htmlFor='amount'>Amount: </label>

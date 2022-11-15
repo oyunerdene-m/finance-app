@@ -1,10 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { getAccounts, addAccount, editAccount, deleteAccount } from '../lib/accountData';
 import AccountList from '../components/Accounts/AccountList';
 import CreateAccount from '../components/Accounts/CreateAccount';
 import EditAccount from '../components/Accounts/EditAccount';
 import { Link } from 'react-router-dom';
-import { useEffect } from 'react';
 
 export default function Accounts() {
 	const [accounts, setAccounts] = useState([]);
@@ -47,7 +46,6 @@ export default function Accounts() {
 				return account.id === id ? updatedAccount : account;
 			}),
 		);
-
 		setIsEditing(false);
 	}
 
