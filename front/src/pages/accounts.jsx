@@ -56,7 +56,10 @@ export default function Accounts() {
 
 	return (
 		<>
-			<Link to='/'>Home</Link>
+			<div>
+				<Link to='/'>Home</Link>
+			</div>
+			<br />
 			<div>
 				<button onClick={() => setShowAccounts(!showAccounts)}>
 					{showAccounts ? 'Hide' : 'Show'} accounts
@@ -69,6 +72,8 @@ export default function Accounts() {
 					/>
 				)}
 			</div>
+			<br />
+
 			<div>
 				{isFormShow ? '' : <button onClick={() => setIsFormShow(true)}>Add Account</button>}
 				{isFormShow && (
@@ -82,6 +87,8 @@ export default function Accounts() {
 					/>
 				)}
 			</div>
+			<br />
+
 			<div>
 				<Link to='/transactions/new'>New transaction</Link>
 			</div>

@@ -18,6 +18,10 @@ export default function Transactions() {
 		<div>
 			<h1>Transactions</h1>
 			<div>
+				<Link to='/accounts'>Accounts</Link>
+			</div>
+			<br />
+			<div>
 				<Link to='/transactions/new'>New transaction</Link>
 			</div>
 			<br />

@@ -1,40 +1,39 @@
-import classes from './TransactionForm.module.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { getTransactionById } from '../../lib/transactionData';
+import classes from './NewTransaction/TransactionForm.module.css';
 
-export default function TransactionForm({
-	type,
-	onFormSubmit,
-	categories,
-	accounts,
-	onIsFormSubmitted,
-}) {
-	const [formData, setFormData] = useState({
-		date: '',
-		type: '',
-		from: '',
-		to: '',
-		category: '',
-		amount: 0,
-		description: '',
-	});
+export default function EditTransaction() {
+	const [editedTransaction, setEditedTransaction] = useState();
+	const { id } = useParams();
 
-	function changeHandler(e) {
-		const { name, value } = e.target;
-		setFormData((prevData) => {
-			return {
-				...prevData,
-				[name]: value,
-				type: type,
-			};
-		});
-	}
+	useEffect(() => {
+		async function fetchData() {
+			const transaction = await getTransactionById(id);
+			setEditedTransaction(transaction);
+		}
+		fetchData();
+	}, []);
 
-	function submitHandler(e) {
-		e.preventDefault();
-		onFormSubmit(formData);
-		setFormData({ date: '', type: '', from: '', to: '', category: '', amount: 0, description: '' });
-		onIsFormSubmitted(true);
-	}
+	console.log(editedTransaction);
+
+	function changeHandler() {}
+	function submitHandler() {}
+	const categories = {
+		income: ['Salary', 'Bonus', 'Cash', 'Allowance', 'Other'],
+		expense: [
+			'Food',
+			'Transportation',
+			'Education',
+			'Household',
+			'Health',
+			'Gift',
+			'Clothes',
+			'Beauty',
+			'Other',
+		],
+		transfer: ['transfer'],
+	};
 
 	let account;
 	if (type === 'transfer') {

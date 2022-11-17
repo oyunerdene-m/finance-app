@@ -6,6 +6,7 @@ import Home from './pages/home';
 import Accounts from './pages/accounts';
 import Transactions from './pages/transactions';
 import NewTransaction from './components/Transactions/NewTransaction/NewTransaction';
+import EditTransaction from './components/Transactions/EditTransaction';
 import { getUsers, addUser } from './lib/userData';
 import { BrowserRouter as Router, Route, Link, Routes, Navigate } from 'react-router-dom';
 
@@ -90,6 +91,7 @@ function App() {
 					<Route path='/accounts' element={<Accounts />} />
 					<Route path='/transactions' element={<Transactions />} />
 					<Route path='/transactions/new' element={<NewTransaction />} />
+					<Route path='/transactions/edit/:id' element={<EditTransaction />} />
 				</Routes>
 			</div>
 		</Router>

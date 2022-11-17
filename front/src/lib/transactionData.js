@@ -65,19 +65,6 @@ const DUMMY_TRANSACTIONS = [
 	},
 ];
 
-const incomeCategories = ['Salary', 'Bonus', 'Cash', 'Allowance', 'Other'];
-const expenseCategories = [
-	'Food',
-	'Transportation',
-	'Education',
-	'Household',
-	'Health',
-	'Gift',
-	'Clothes',
-	'Beauty',
-	'Other',
-];
-
 function getTransactions() {
 	return new Promise((resolve) => {
 		setTimeout(() => {
@@ -86,4 +73,28 @@ function getTransactions() {
 	});
 }
 
-export { getTransactions };
+function addTransaction(newTransaction) {
+	const addedTransaction = {
+		...newTransaction,
+		id: Math.random().toString(),
+	};
+
+	DUMMY_TRANSACTIONS.push(addedTransaction);
+
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve(addedTransaction);
+		}, 500);
+	});
+}
+
+function getTransactionById(id) {
+	const foundTransaction = DUMMY_TRANSACTIONS.find((transaction) => transaction.id === id);
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve(foundTransaction);
+		}, 500);
+	});
+}
+
+export { getTransactions, addTransaction, getTransactionById };

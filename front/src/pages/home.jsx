@@ -5,11 +5,15 @@ export default function Home() {
 		<>
 			<h1>Finance App</h1>
 			<div>
-				<Link to='/accounts'>accounts</Link>
+				<Link to='/accounts'>Accounts</Link>
 			</div>
 			<br />
 			<div>
 				<Link to='/transactions'>All transactions</Link>
+			</div>
+			<br />
+			<div>
+				<Link to='/transactions/new'>Add new transaction</Link>
 			</div>
 		</>
 	);

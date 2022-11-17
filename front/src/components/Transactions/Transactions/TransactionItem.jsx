@@ -1,7 +1,8 @@
 import classes from './TransactionItem.module.css';
+import { Link } from 'react-router-dom';
 
 export default function TransactionItem(props) {
-	const { date, category, type, from, to, amount, description } = props.transaction;
+	const { id, date, category, type, from, to, amount, description } = props.transaction;
 
 	return (
 		<div className={classes.transaction}>
@@ -22,6 +23,12 @@ export default function TransactionItem(props) {
 					<p>description: {description}</p>
 				</div>
 				<div> € {amount}</div>
+				<div style={{ display: 'flex', flexDirection: 'column' }}>
+					<Link to={`/transactions/edit/${id}`}>
+						<button style={{ margin: '10px' }}>edit</button>
+					</Link>
+					<button>delete</button>
+				</div>
 			</li>
 		</div>
 	);
