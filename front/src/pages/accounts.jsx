@@ -1,24 +1,16 @@
-import { useState, useEffect } from 'react';
-import { getAccounts, addAccount, editAccount, deleteAccount } from '../lib/accountData';
+import { useState, useContext } from 'react';
+import { addAccount, editAccount, deleteAccount } from '../lib/accountData';
 import AccountList from '../components/Accounts/AccountList';
 import CreateAccount from '../components/Accounts/CreateAccount';
 import EditAccount from '../components/Accounts/EditAccount';
 import { Link } from 'react-router-dom';
+import AccountsContext from '../context/accounts-context';
 
 export default function Accounts() {
-	const [accounts, setAccounts] = useState([]);
-	const [showAccounts, setShowAccounts] = useState(false);
+	const { accounts, setAccounts } = useContext(AccountsContext);
 	const [isFormShow, setIsFormShow] = useState(false);
 	const [isEditing, setIsEditing] = useState(false);
 	const [editedAccount, setEditedAccount] = useState();
-
-	useEffect(() => {
-		async function fetchData() {
-			const response = await getAccounts();
-			setAccounts(response);
-		}
-		fetchData();
-	}, []);
 
 	async function addAccountHandler(accountData) {
 		const addedAccount = await addAccount(accountData);
@@ -61,16 +53,11 @@ export default function Accounts() {
 			</div>
 			<br />
 			<div>
-				<button onClick={() => setShowAccounts(!showAccounts)}>
-					{showAccounts ? 'Hide' : 'Show'} accounts
-				</button>
-				{showAccounts && (
-					<AccountList
-						accounts={accounts}
-						onEditing={editingAccount}
-						onDelete={deleteAccountHandler}
-					/>
-				)}
+				<AccountList
+					accounts={accounts}
+					onEditing={editingAccount}
+					onDelete={deleteAccountHandler}
+				/>
 			</div>
 			<br />
 

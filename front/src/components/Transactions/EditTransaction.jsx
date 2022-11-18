@@ -1,26 +1,17 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import { getTransactionById, editTransaction, getTransactions } from '../../lib/transactionData';
-import { getAccounts } from '../../lib/accountData';
 import TransactionButtons from './NewTransaction/TransactionButtons';
-
 import classes from './NewTransaction/TransactionForm.module.css';
+import AccountsContext from '../../context/accounts-context';
 
 export default function EditTransaction() {
-	const [accounts, setAccounts] = useState([]);
+	const { accounts } = useContext(AccountsContext);
 	const [transactions, setTransactions] = useState([]);
 	const [editedTransaction, setEditedTransaction] = useState();
 	const [isSubmitted, setIsSubmitted] = useState(false);
 	const { id } = useParams();
-
-	useEffect(() => {
-		async function fetchAccounts() {
-			const data = await getAccounts();
-			setAccounts(data);
-		}
-		fetchAccounts();
-	}, []);
-
+	console.log(accounts);
 	useEffect(() => {
 		async function fetchTransactions() {
 			const data = await getTransactions();
@@ -139,6 +130,7 @@ export default function EditTransaction() {
 
 	return (
 		<>
+			{accounts.length <= 0 && 'Loading...'}
 			<div className={classes.transfer}>
 				<TransactionButtons onType={typeSelectHandler} transactionType={editedTransaction.type} />
 				<form onSubmit={submitHandler}>

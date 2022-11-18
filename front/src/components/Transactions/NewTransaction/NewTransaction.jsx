@@ -1,22 +1,15 @@
 import { useState, useEffect } from 'react';
-import { getAccounts } from '../../../lib/accountData';
 import { getTransactions, addTransaction } from '../../../lib/transactionData';
 import TransactionButtons from './TransactionButtons';
 import TransactionForm from './TransactionForm';
 import { Navigate } from 'react-router-dom';
 
 export default function NewTansaction() {
-	const [accounts, setAccounts] = useState([]);
 	const [transactions, setTransactions] = useState([]);
 	const [transactionType, setTransactionType] = useState('');
 	const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 
 	useEffect(() => {
-		async function fetchAccounts() {
-			const data = await getAccounts();
-			setAccounts(data);
-		}
-		fetchAccounts();
 		async function fetchTransactions() {
 			const data = await getTransactions();
 			setTransactions(data);
@@ -60,7 +53,6 @@ export default function NewTansaction() {
 				<TransactionForm
 					type={transactionType}
 					categories={categories}
-					accounts={accounts}
 					onFormSubmit={submitHandler}
 					onIsFormSubmitted={setIsFormSubmitted}
 				/>
