@@ -1,6 +1,6 @@
 import TransactionItem from './TransactionItem';
 
-export default function TransactionList({ transactions }) {
+export default function TransactionList({ transactions, onDelete }) {
 	return (
 		<ul
 			style={{
@@ -11,7 +11,7 @@ export default function TransactionList({ transactions }) {
 			}}
 		>
 			{transactions.map((transaction) => (
-				<TransactionItem key={transaction.id} transaction={transaction} />
+				<TransactionItem onDelete={onDelete} key={transaction.id} transaction={transaction} />
 			))}
 		</ul>
 	);

@@ -1,6 +1,6 @@
-const DUMMY_TRANSACTIONS = [
+let DUMMY_TRANSACTIONS = [
 	{
-		id: Math.random().toString(),
+		id: 1,
 		date: '2022-02-20',
 		type: 'income',
 		from: '',
@@ -11,7 +11,7 @@ const DUMMY_TRANSACTIONS = [
 	},
 
 	{
-		id: Math.random().toString(),
+		id: 2,
 		date: '2020-12-28',
 		type: 'expense',
 		from: 'Degi wallet',
@@ -22,7 +22,7 @@ const DUMMY_TRANSACTIONS = [
 	},
 
 	{
-		id: Math.random().toString(),
+		id: 3,
 		date: '2022-02-20',
 		type: 'income',
 		from: '',
@@ -33,17 +33,17 @@ const DUMMY_TRANSACTIONS = [
 	},
 
 	{
-		id: Math.random().toString(),
+		id: 4,
 		date: '2021-12-20',
 		type: 'transfer',
-		from: 'Degi tdb',
+		from: 'Degi wallet',
 		to: 'My haan',
 		category: 'Transfer',
 		amount: 300,
 		description: 'to get gift',
 	},
 	{
-		id: Math.random().toString(),
+		id: 5,
 		date: '2021-12-22',
 		type: 'expense',
 		from: 'My haan',
@@ -54,10 +54,10 @@ const DUMMY_TRANSACTIONS = [
 	},
 
 	{
-		id: Math.random().toString(),
+		id: 6,
 		date: '2022-07-10',
 		type: 'transfer',
-		from: 'My xas',
+		from: 'My haan',
 		to: 'My tdb',
 		category: 'Transfer',
 		amount: 200,
@@ -76,7 +76,7 @@ function getTransactions() {
 function addTransaction(newTransaction) {
 	const addedTransaction = {
 		...newTransaction,
-		id: Math.random().toString(),
+		id: DUMMY_TRANSACTIONS.length + 1,
 	};
 
 	DUMMY_TRANSACTIONS.push(addedTransaction);
@@ -89,7 +89,7 @@ function addTransaction(newTransaction) {
 }
 
 function getTransactionById(id) {
-	const foundTransaction = DUMMY_TRANSACTIONS.find((transaction) => transaction.id === id);
+	const foundTransaction = DUMMY_TRANSACTIONS.find((transaction) => transaction.id === Number(id));
 	return new Promise((resolve) => {
 		setTimeout(() => {
 			resolve(foundTransaction);
@@ -97,4 +97,55 @@ function getTransactionById(id) {
 	});
 }
 
-export { getTransactions, addTransaction, getTransactionById };
+function editTransaction(id, edited) {
+	let foundTransaction = DUMMY_TRANSACTIONS.find((transaction) => transaction.id === Number(id));
+
+	if (!foundTransaction) {
+		return new Promise((resolve) => {
+			setTimeout(() => {
+				resolve(null);
+			}, 500);
+		});
+	}
+	foundTransaction = {
+		...foundTransaction,
+		date: edited.date,
+		type: edited.type,
+		from: edited.from,
+		to: edited.to,
+		category: edited.category,
+		amount: edited.amount,
+		description: edited.description,
+	};
+
+	DUMMY_TRANSACTIONS = DUMMY_TRANSACTIONS.map((transaction) =>
+		transaction.id === Number(id) ? foundTransaction : transaction,
+	);
+
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve(foundTransaction);
+		}, 500);
+	});
+}
+
+function deleteTransaction(id) {
+	const deleted = DUMMY_TRANSACTIONS.find((transaction) => transaction.id === Number(id));
+	DUMMY_TRANSACTIONS = DUMMY_TRANSACTIONS.filter((transaction) => transaction.id !== Number(id));
+
+	if (!deleted) {
+		return new Promise((resolve) => {
+			setTimeout(() => {
+				resolve(null);
+			}, 500);
+		});
+	}
+
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			resolve(deleted);
+		}, 500);
+	});
+}
+
+export { getTransactions, addTransaction, getTransactionById, editTransaction, deleteTransaction };

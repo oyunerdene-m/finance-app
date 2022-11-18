@@ -1,7 +1,7 @@
 let DUMMY_ACCOUNTS = [
 	{
 		id: Math.random().toString(),
-		name: 'My hudaldaa',
+		name: 'My tdb',
 		type: 'savings',
 		amount: 1000,
 		currency: '€',
