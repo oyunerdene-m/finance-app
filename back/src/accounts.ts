@@ -1,3 +1,5 @@
+import fs from 'node:fs/promises';
+
 type NoIdAccount = {
   userId: number;
   amount: number;
@@ -13,24 +15,40 @@ type Account = NoIdAccount & {
 
 const accounts: Account[] = [];
 
+async function loadAccounts() {
+  const fh = await fs.open(__dirname + '/../.db/accounts.json', 'r');
+  const data = await fs.readFile(fh);
+  await fh.close();
+  accounts.push(...JSON.parse(data.toString()));
+}
+
+async function saveAccounts() {
+  const fh = await fs.open(__dirname + '/../.db/accounts.json', 'w');
+  await fs.writeFile(fh, JSON.stringify(accounts, null, 2));
+  await fh.close();
+}
+
+loadAccounts().catch(console.error);
+
 function getAccounts(userId: number) {
   const userAccounts = accounts.filter((a) => a.userId === userId);
   return new Promise<Account[]>((resolve) => setTimeout(() => resolve([...userAccounts]), 100));
 }
 
-function addAccount(userId: number, accountData: NoIdAccount) {
-  const newAccount = {
+async function addAccount(userId: number, accountData: NoIdAccount) {
+  const newAccount: Account = {
     ...accountData,
     userId,
     id: 10000 * accounts.length + Math.floor(Math.random() * 10000),
   };
 
   accounts.push(newAccount);
+  await saveAccounts();
 
-  return new Promise<Account>((resolve) => setTimeout(() => resolve(newAccount), 100));
+  return newAccount;
 }
 
-function editAccount(userId: number, id: number, accountData: NoIdAccount) {
+async function editAccount(userId: number, id: number, accountData: NoIdAccount) {
   const accountIndex = accounts.findIndex((a) => a.id === id);
   if (accountIndex === -1) {
     throw new Error('Account not found');
@@ -40,17 +58,18 @@ function editAccount(userId: number, id: number, accountData: NoIdAccount) {
     throw new Error('Account not found');
   }
 
-  const updatedAccount = {
+  const updatedAccount: Account = {
     ...accounts[accountIndex],
     ...accountData,
   };
 
   accounts[accountIndex] = updatedAccount;
+  await saveAccounts();
 
-  return new Promise<Account>((resolve) => setTimeout(() => resolve(updatedAccount), 100));
+  return updatedAccount;
 }
 
-function deleteAccount(userId: number, id: number) {
+async function deleteAccount(userId: number, id: number) {
   const accountIndex = accounts.findIndex((a) => a.id === id);
   if (accountIndex === -1) {
     throw new Error('Account not found');
@@ -61,8 +80,7 @@ function deleteAccount(userId: number, id: number) {
   }
 
   accounts.splice(accountIndex, 1);
-
-  return new Promise<void>((resolve) => setTimeout(() => resolve(), 100));
+  await saveAccounts();
 }
 
 export { Account, getAccounts, addAccount, editAccount, deleteAccount };

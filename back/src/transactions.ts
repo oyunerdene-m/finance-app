@@ -1,3 +1,5 @@
+import fs from 'node:fs/promises';
+
 type NoIdTransaction = {
   userId: number;
   fromAccountId: number;
@@ -14,24 +16,40 @@ type Transaction = NoIdTransaction & {
 
 const transactions: Transaction[] = [];
 
+async function loadTransactions() {
+  const fh = await fs.open(__dirname + '/../.db/transactions.json', 'r');
+  const data = await fs.readFile(fh);
+  await fh.close();
+  transactions.push(...JSON.parse(data.toString()));
+}
+
+async function saveTransactions() {
+  const fh = await fs.open(__dirname + '/../.db/transactions.json', 'w');
+  await fs.writeFile(fh, JSON.stringify(transactions, null, 2));
+  await fh.close();
+}
+
+loadTransactions().catch(console.error);
+
 function getTransactions(userId: number) {
   const userTransactions = transactions.filter((a) => a.userId === userId);
   return new Promise<Transaction[]>((resolve) => setTimeout(() => resolve([...userTransactions]), 100));
 }
 
-function addTransaction(userId: number, accountData: NoIdTransaction) {
-  const newTransaction = {
-    ...accountData,
+async function addTransaction(userId: number, transactionData: NoIdTransaction) {
+  const newTransaction: Transaction = {
+    ...transactionData,
     userId,
     id: 10000 * transactions.length + Math.floor(Math.random() * 10000),
   };
 
   transactions.push(newTransaction);
+  await saveTransactions();
 
-  return new Promise<Transaction>((resolve) => setTimeout(() => resolve(newTransaction), 100));
+  return newTransaction;
 }
 
-function editTransaction(userId: number, id: number, accountData: NoIdTransaction) {
+async function editTransaction(userId: number, id: number, transactionData: NoIdTransaction) {
   const idx = transactions.findIndex((a) => a.id === id);
   if (idx === -1) {
     throw new Error('Transaction not found');
@@ -41,15 +59,16 @@ function editTransaction(userId: number, id: number, accountData: NoIdTransactio
     throw new Error('Transaction not found');
   }
 
-  const updatedTransaction = {
+  const updatedTransaction: Transaction = {
     ...transactions[idx],
-    ...accountData,
+    ...transactionData,
     amount: transactions[idx].amount,
   };
 
   transactions[idx] = updatedTransaction;
+  await saveTransactions();
 
-  return new Promise<Transaction>((resolve) => setTimeout(() => resolve(updatedTransaction), 100));
+  return updatedTransaction;
 }
 
 export { Transaction, getTransactions, addTransaction, editTransaction };

@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt';
+import fs from 'node:fs/promises';
 
 type User = {
   id: number;
@@ -8,6 +9,21 @@ type User = {
 };
 
 const users: User[] = [];
+
+async function loadUsers() {
+  const fh = await fs.open(__dirname + '/../.db/users.json', 'r');
+  const data = await fs.readFile(fh);
+  await fh.close();
+  users.push(...JSON.parse(data.toString()));
+}
+
+async function saveUsers() {
+  const fh = await fs.open(__dirname + '/../.db/users.json', 'w');
+  await fs.writeFile(fh, JSON.stringify(users, null, 2));
+  await fh.close();
+}
+
+loadUsers().catch(console.error);
 
 const saltRounds = 10;
 
@@ -38,8 +54,7 @@ async function register(name: string, email: string, password: string) {
   };
 
   users.push({ ...user, hashedPassword: await hashPassword(password) });
-
-  // TODO: save users to JSON file
+  await saveUsers();
 
   return user;
 }
