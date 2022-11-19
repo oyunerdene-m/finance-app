@@ -1,6 +1,7 @@
 import express from 'express';
 
 import { addAccount, deleteAccount, editAccount, getAccounts } from './accounts';
+import { addTransaction, editTransaction, getTransactions } from './transactions';
 
 const router = express.Router();
 
@@ -44,6 +45,33 @@ router.post('/accounts/delete/:id', async (req, res, next) => {
   try {
     await deleteAccount(req.session.user!.id, parseInt(req.params.id));
     res.json({ data: { done: true } });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get('/transactions', async (req, res, next) => {
+  try {
+    const transactions = await getTransactions(req.session.user!.id);
+    res.json({ data: { transactions } });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post('/transactions/add', async (req, res, next) => {
+  try {
+    const newTransaction = await addTransaction(req.session.user!.id, req.body);
+    res.json({ data: { transaction: newTransaction } });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post('/transactions/edit/:id', async (req, res, next) => {
+  try {
+    const updatedTransaction = await editTransaction(req.session.user!.id, parseInt(req.params.id), req.body);
+    res.json({ data: { transaction: updatedTransaction } });
   } catch (error) {
     next(error);
   }
