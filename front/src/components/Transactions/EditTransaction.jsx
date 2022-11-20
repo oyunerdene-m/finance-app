@@ -1,24 +1,16 @@
 import { useState, useEffect, useContext } from 'react';
-import { useParams, Navigate } from 'react-router-dom';
-import { getTransactionById, editTransaction, getTransactions } from '../../lib/transactionData';
+import { useParams, Navigate, Link } from 'react-router-dom';
+import { getTransactionById, editTransaction } from '../../lib/transactionData';
 import TransactionButtons from './NewTransaction/TransactionButtons';
 import classes from './NewTransaction/TransactionForm.module.css';
 import AccountsContext from '../../context/accounts-context';
 
 export default function EditTransaction() {
 	const { accounts } = useContext(AccountsContext);
-	const [transactions, setTransactions] = useState([]);
 	const [editedTransaction, setEditedTransaction] = useState();
 	const [isSubmitted, setIsSubmitted] = useState(false);
 	const { id } = useParams();
 	console.log(accounts);
-	useEffect(() => {
-		async function fetchTransactions() {
-			const data = await getTransactions();
-			setTransactions(data);
-		}
-		fetchTransactions();
-	}, []);
 
 	useEffect(() => {
 		async function fetchData() {
@@ -37,10 +29,8 @@ export default function EditTransaction() {
 
 	async function submitHandler(event) {
 		event.preventDefault();
-		const edited = await editTransaction(id, editedTransaction);
-		setTransactions((prevTransactions) =>
-			prevTransactions.map((transaction) => (transaction.id === Number(id) ? edited : transaction)),
-		);
+		await editTransaction(id, editedTransaction);
+
 		setIsSubmitted(true);
 	}
 
@@ -66,7 +56,7 @@ export default function EditTransaction() {
 		transfer: ['transfer'],
 	};
 
-	if (editedTransaction === undefined) return <h1>Loading...</h1>;
+	if (editedTransaction === undefined || accounts.length <= 0) return <h1>Loading...</h1>;
 
 	let account;
 	if (editedTransaction.type === 'transfer') {
@@ -128,68 +118,71 @@ export default function EditTransaction() {
 		}
 	}
 
-	return (
-		<>
-			{accounts.length <= 0 && 'Loading...'}
-			<div className={classes.transfer}>
-				<TransactionButtons onType={typeSelectHandler} transactionType={editedTransaction.type} />
-				<form onSubmit={submitHandler}>
-					<div>
-						<label htmlFor='date'>Date: </label>
-						<input
-							value={editedTransaction.date}
-							onChange={changeHandler}
-							type='date'
-							name='date'
-							id='date'
-						/>
-					</div>
-					{account}
-					{editedTransaction.type !== 'transfer' && (
-						<div>
-							<label htmlFor='category'>Category: </label>
-							<select
-								value={editedTransaction.category}
-								onChange={changeHandler}
-								name='category'
-								id='category'
-							>
-								<option value=''>Choose category</option>
-								{categories[editedTransaction.type].map((category) => (
-									<option key={category} value={category}>
-										{category}
-									</option>
-								))}
-							</select>
-						</div>
-					)}
+	if (isSubmitted) return <Navigate to='/transactions' />;
 
+	return (
+		<div className={classes.transfer}>
+			<TransactionButtons onType={typeSelectHandler} transactionType={editedTransaction.type} />
+			<form onSubmit={submitHandler}>
+				<div>
+					<label htmlFor='date'>Date: </label>
+					<input
+						value={editedTransaction.date}
+						onChange={changeHandler}
+						type='date'
+						name='date'
+						id='date'
+					/>
+				</div>
+				{account}
+				{editedTransaction.type !== 'transfer' && (
 					<div>
-						<label htmlFor='amount'>Amount: </label>
-						<input
-							value={editedTransaction.amount}
+						<label htmlFor='category'>Category: </label>
+						<select
+							value={editedTransaction.category}
 							onChange={changeHandler}
-							type='number'
-							name='amount'
-							id='amount'
-						/>
+							name='category'
+							id='category'
+						>
+							<option value=''>Choose category</option>
+							{categories[editedTransaction.type].map((category) => (
+								<option key={category} value={category}>
+									{category}
+								</option>
+							))}
+						</select>
 					</div>
-					<div>
-						<label htmlFor='description'>Description: </label>
-						<input
-							value={editedTransaction.description}
-							onChange={changeHandler}
-							type='text'
-							name='description'
-							id='description'
-						/>
-					</div>
-					<div>
-						<button>Save</button>
-					</div>
-				</form>
-			</div>
-			{isSubmitted && <Navigate to='/transactions' replace={true} />}
-		</>
+				)}
+
+				<div>
+					<label htmlFor='amount'>Amount: </label>
+					<input
+						value={editedTransaction.amount}
+						onChange={changeHandler}
+						type='number'
+						name='amount'
+						id='amount'
+					/>
+				</div>
+				<div>
+					<label htmlFor='description'>Description: </label>
+					<input
+						value={editedTransaction.description}
+						onChange={changeHandler}
+						type='text'
+						name='description'
+						id='description'
+					/>
+				</div>
+				<div>
+					<button>Save</button>
+				</div>
+			</form>
+			<button>
+				<Link style={{ textDecoration: 'none', color: 'black' }} to='/transactions'>
+					Cancel
+				</Link>
+			</button>
+		</div>
 	);
 }

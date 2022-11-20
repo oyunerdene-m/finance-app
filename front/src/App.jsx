@@ -64,6 +64,9 @@ function App() {
 								)}
 							</>
 						)}
+						<Link to='/'>Home</Link>
+						<br />
+						<Link to='/transactions'>Transactions</Link>
 					</ul>
 				</nav>
 
