@@ -1,93 +1,84 @@
-import {useState} from 'react';
-import { getAccounts, addAccount, editAccount } from '../lib/accountData';
+import { useState, useContext } from 'react';
+import { addAccount, editAccount, deleteAccount } from '../lib/accountData';
 import AccountList from '../components/Accounts/AccountList';
 import CreateAccount from '../components/Accounts/CreateAccount';
 import EditAccount from '../components/Accounts/EditAccount';
-import {Link} from 'react-router-dom';
-import { useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import AccountsContext from '../context/accounts-context';
 
 export default function Accounts() {
-    const [accounts, setAccounts] = useState([]);
-    const [showAccounts, setShowAccounts] = useState(false);
-    const [isFormShow, setIsFormShow] = useState(false);
-    const [isEditing, setIsEditing] = useState(false);
-    const [editedAccount, setEditedAccount] = useState();
+	const { accounts, setAccounts } = useContext(AccountsContext);
+	const [isFormShow, setIsFormShow] = useState(false);
+	const [isEditing, setIsEditing] = useState(false);
+	const [editedAccount, setEditedAccount] = useState();
 
-    useEffect(() => {
-        console.log('useeffec')
-        async function fetchData() {
-          const response = await getAccounts();
-          setAccounts(response)
-        }
-        fetchData();
-      }, []); 
-    console.log(accounts)
+	async function addAccountHandler(accountData) {
+		const addedAccount = await addAccount(accountData);
+		setAccounts((prevAccounts) => [...prevAccounts, addedAccount]);
+		setIsFormShow(false);
+	}
 
-    async function addAccountHandler(accountData){
-        console.log(accountData)
+	function closeHandler() {
+		setIsFormShow(false);
+	}
 
-        const addedAccount = await addAccount(accountData);
-        console.log(addedAccount)
-        setAccounts(prevAccounts => [...prevAccounts, addedAccount])
-        console.log(accounts)
-        setIsFormShow(false)
-    }
-    console.log(accounts)
+	function editingAccount(id) {
+		setIsEditing(true);
+		accounts.forEach((account) => {
+			if (account.id === id) {
+				setEditedAccount(account);
+			}
+		});
+	}
 
+	async function editAccountHandler(id, editedAccountData) {
+		const updatedAccount = await editAccount(id, editedAccountData);
+		setAccounts((prevAccounts) =>
+			prevAccounts.map((account) => {
+				return account.id === id ? updatedAccount : account;
+			}),
+		);
+		setIsEditing(false);
+	}
 
-    function closeHandler(){
-        setIsFormShow(false);
-    }
+	async function deleteAccountHandler(id) {
+		await deleteAccount(id);
+		setAccounts((prevAccounts) => prevAccounts.filter((account) => account.id !== id));
+	}
 
-    function editingAccount(id){
-        setIsEditing(true)
-        accounts.forEach(account => {
-            if(account.id === id){
-                setEditedAccount(account)
-            }
-        });
-    }
+	return (
+		<>
+			<div>
+				<Link to='/'>Home</Link>
+			</div>
+			<br />
+			<div>
+				<AccountList
+					accounts={accounts}
+					onEditing={editingAccount}
+					onDelete={deleteAccountHandler}
+				/>
+			</div>
+			<br />
 
-    async function editAccountHandler(id, editedAccountData){
-        // const updatedAccounts = await editAccount(id, editedAccountData)
-        // setAccounts(updatedAccounts)
+			<div>
+				{isFormShow ? '' : <button onClick={() => setIsFormShow(true)}>Add Account</button>}
+				{isFormShow && (
+					<CreateAccount onAddAccount={addAccountHandler} onCloseForm={closeHandler} />
+				)}
+				{isEditing && (
+					<EditAccount
+						account={editedAccount}
+						onEditAccount={editAccountHandler}
+						onCancel={() => setIsEditing(false)}
+					/>
+				)}
+			</div>
+			<br />
 
-        setAccounts(prevAccounts => prevAccounts.map(account=>{
-            if(account.id === id){
-                return {
-                    ...account,
-                    name: editedAccountData.name,
-                    amount: editedAccountData.amount,
-                    description: editedAccountData.description,
-                    type: editedAccountData.type,
-                    currency: editedAccountData.currency
-                }
-            } else {
-                return account
-            }
-        }))
-        setIsEditing(false)
-    }
-    
-    function deleteAccountHandler(id){
-        setAccounts(prevAccounts=>prevAccounts.filter(account=>account.id !== id));
-    }
-
-    return (
-    <>
-        <Link to="/">Home</Link>
-        <div>
-            <button onClick={()=>setShowAccounts(!showAccounts)}>{showAccounts ? "Hide": "Show"} accounts</button>
-            {showAccounts && <AccountList accounts={accounts} onEditing={editingAccount} onDelete={deleteAccountHandler}/>}
-        </div>
-        <div>
-            {isFormShow ? '': <button onClick={()=>setIsFormShow(true)}>Add Account</button>}
-            {isFormShow && <CreateAccount onAddAccount={addAccountHandler} onCloseForm={closeHandler}/>}
-            {isEditing && <EditAccount account= {editedAccount} onEditAccount={editAccountHandler} onCancel={()=>setIsEditing(false)}/>}
-        </div>
-        <div>
-            <Link to="/transactions">Transactions</Link>
-        </div>
-    </>)
-    
+			<div>
+				<Link to='/transactions/new'>New transaction</Link>
+			</div>
+		</>
+	);
 }

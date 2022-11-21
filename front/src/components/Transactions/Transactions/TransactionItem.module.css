@@ -1,0 +1,10 @@
+.transaction li {
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px;
+}
+
+.transaction:nth-child(odd){
+    background-color: antiquewhite;
+}
