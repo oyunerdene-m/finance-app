@@ -1,37 +1,21 @@
-import { useState, useEffect } from 'react';
-import { getTransactions, addTransaction } from '../../../lib/transactionData';
+import { useState } from 'react';
+import { addTransaction } from '../../../lib/transactionData';
 import TransactionButtons from './TransactionButtons';
 import TransactionForm from './TransactionForm';
 import { Navigate } from 'react-router-dom';
 
 export default function NewTansaction() {
-	const [transactions, setTransactions] = useState([]);
 	const [transactionType, setTransactionType] = useState('');
 	const [isFormSubmitted, setIsFormSubmitted] = useState(false);
-
-	useEffect(() => {
-		async function fetchTransactions() {
-			const data = await getTransactions();
-			setTransactions(data);
-		}
-		fetchTransactions();
-	}, []);
-
-	const categories = {
-		income: ['Salary', 'Bonus', 'Cash', 'Allowance', 'Other'],
-		expense: [
-			'Food',
-			'Transportation',
-			'Education',
-			'Household',
-			'Health',
-			'Gift',
-			'Clothes',
-			'Beauty',
-			'Other',
-		],
-		transfer: ['transfer'],
-	};
+	const [formData, setFormData] = useState({
+		date: '',
+		type: '',
+		from: '',
+		to: '',
+		category: '',
+		amount: 0,
+		description: '',
+	});
 
 	function clickHandler(type) {
 		if (type === transactionType) {
@@ -41,9 +25,22 @@ export default function NewTansaction() {
 		}
 	}
 
-	async function submitHandler(formData) {
-		const addedTransaction = await addTransaction(formData);
-		setTransactions((prevTransactions) => [...prevTransactions, addedTransaction]);
+	function changeHandler(e) {
+		const { name, value } = e.target;
+		setFormData((prevData) => {
+			return {
+				...prevData,
+				[name]: value,
+				type: transactionType,
+			};
+		});
+	}
+
+	async function submitHandler(e) {
+		e.preventDefault();
+		await addTransaction(formData);
+		setFormData({ date: '', type: '', from: '', to: '', category: '', amount: 0, description: '' });
+		setIsFormSubmitted(true);
 	}
 
 	return (
@@ -52,9 +49,9 @@ export default function NewTansaction() {
 			{transactionType.length > 0 && (
 				<TransactionForm
 					type={transactionType}
-					categories={categories}
 					onFormSubmit={submitHandler}
-					onIsFormSubmitted={setIsFormSubmitted}
+					onChange={changeHandler}
+					formData={formData}
 				/>
 			)}
 			{isFormSubmitted && <Navigate to='/transactions' replace={true} />}

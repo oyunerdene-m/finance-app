@@ -2,6 +2,7 @@ import { useState, useEffect, useContext } from 'react';
 import { useParams, Navigate, Link } from 'react-router-dom';
 import { getTransactionById, editTransaction } from '../../lib/transactionData';
 import TransactionButtons from './NewTransaction/TransactionButtons';
+import TransactionForm from './NewTransaction/TransactionForm';
 import classes from './NewTransaction/TransactionForm.module.css';
 import AccountsContext from '../../context/accounts-context';
 
@@ -30,7 +31,6 @@ export default function EditTransaction() {
 	async function submitHandler(event) {
 		event.preventDefault();
 		await editTransaction(id, editedTransaction);
-
 		setIsSubmitted(true);
 	}
 

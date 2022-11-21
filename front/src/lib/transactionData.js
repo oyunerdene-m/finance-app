@@ -65,6 +65,22 @@ let DUMMY_TRANSACTIONS = [
 	},
 ];
 
+const categories = {
+	income: ['Salary', 'Bonus', 'Cash', 'Allowance', 'Other'],
+	expense: [
+		'Food',
+		'Transportation',
+		'Education',
+		'Household',
+		'Health',
+		'Gift',
+		'Clothes',
+		'Beauty',
+		'Other',
+	],
+	transfer: ['transfer'],
+};
+
 function getTransactions() {
 	return new Promise((resolve) => {
 		setTimeout(() => {
@@ -148,4 +164,11 @@ function deleteTransaction(id) {
 	});
 }
 
-export { getTransactions, addTransaction, getTransactionById, editTransaction, deleteTransaction };
+export {
+	getTransactions,
+	addTransaction,
+	getTransactionById,
+	editTransaction,
+	deleteTransaction,
+	categories,
+};

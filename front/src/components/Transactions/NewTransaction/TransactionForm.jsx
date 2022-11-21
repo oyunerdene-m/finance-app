@@ -1,37 +1,10 @@
 import classes from './TransactionForm.module.css';
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
 import AccountsContext from '../../../context/accounts-context';
+import { categories } from '../../../lib/transactionData';
 
-export default function TransactionForm({ type, onFormSubmit, categories, onIsFormSubmitted }) {
+export default function TransactionForm({ type, onFormSubmit, onChange, formData }) {
 	const { accounts } = useContext(AccountsContext);
-
-	const [formData, setFormData] = useState({
-		date: '',
-		type: '',
-		from: '',
-		to: '',
-		category: '',
-		amount: 0,
-		description: '',
-	});
-
-	function changeHandler(e) {
-		const { name, value } = e.target;
-		setFormData((prevData) => {
-			return {
-				...prevData,
-				[name]: value,
-				type: type,
-			};
-		});
-	}
-
-	function submitHandler(e) {
-		e.preventDefault();
-		onFormSubmit(formData);
-		setFormData({ date: '', type: '', from: '', to: '', category: '', amount: 0, description: '' });
-		onIsFormSubmitted(true);
-	}
 
 	let account;
 	if (type === 'transfer') {
@@ -39,7 +12,7 @@ export default function TransactionForm({ type, onFormSubmit, categories, onIsFo
 			<>
 				<div>
 					<label htmlFor='from'>From: </label>
-					<select value={formData.from} onChange={changeHandler} name='from' id='from'>
+					<select value={formData.from} onChange={onChange} name='from' id='from'>
 						<option value=''>Choose account</option>
 						{accounts.map((account) => (
 							<option key={account.id} value={account.name}>
@@ -50,7 +23,7 @@ export default function TransactionForm({ type, onFormSubmit, categories, onIsFo
 				</div>
 				<div>
 					<label htmlFor='to'>To: </label>
-					<select value={formData.to} onChange={changeHandler} name='to' id='to'>
+					<select value={formData.to} onChange={onChange} name='to' id='to'>
 						<option value=''>Choose account</option>
 						{accounts.map((account) => (
 							<option key={account.id} value={account.name}>
@@ -66,7 +39,7 @@ export default function TransactionForm({ type, onFormSubmit, categories, onIsFo
 			account = (
 				<div>
 					<label htmlFor='to'>To: </label>
-					<select value={formData.to} onChange={changeHandler} name='to' id='to'>
+					<select value={formData.to} onChange={onChange} name='to' id='to'>
 						<option value=''>Choose account</option>
 						{accounts.length <= 0
 							? 'Loading...'
@@ -82,7 +55,7 @@ export default function TransactionForm({ type, onFormSubmit, categories, onIsFo
 			account = (
 				<div>
 					<label htmlFor='from'>From: </label>
-					<select value={formData.from} onChange={changeHandler} name='from' id='from'>
+					<select value={formData.from} onChange={onChange} name='from' id='from'>
 						<option value=''>Choose account</option>
 						{accounts.length <= 0
 							? 'Loading...'
@@ -101,27 +74,16 @@ export default function TransactionForm({ type, onFormSubmit, categories, onIsFo
 		<>
 			<div className={classes.transfer}>
 				<h3>Make a {type}</h3>
-				<form onSubmit={submitHandler}>
+				<form onSubmit={(e) => onFormSubmit(e)}>
 					<div>
 						<label htmlFor='date'>Date: </label>
-						<input
-							value={formData.date}
-							onChange={changeHandler}
-							type='date'
-							name='date'
-							id='date'
-						/>
+						<input value={formData.date} onChange={onChange} type='date' name='date' id='date' />
 					</div>
 					{account}
 					{type !== 'transfer' && (
 						<div>
 							<label htmlFor='category'>Category: </label>
-							<select
-								value={formData.category}
-								onChange={changeHandler}
-								name='category'
-								id='category'
-							>
+							<select value={formData.category} onChange={onChange} name='category' id='category'>
 								<option value=''>Choose category</option>
 								{categories[type].map((category) => (
 									<option key={category} value={category}>
@@ -136,7 +98,7 @@ export default function TransactionForm({ type, onFormSubmit, categories, onIsFo
 						<label htmlFor='amount'>Amount: </label>
 						<input
 							value={formData.amount}
-							onChange={changeHandler}
+							onChange={onChange}
 							type='number'
 							name='amount'
 							id='amount'
@@ -146,7 +108,7 @@ export default function TransactionForm({ type, onFormSubmit, categories, onIsFo
 						<label htmlFor='description'>Description: </label>
 						<input
 							value={formData.description}
-							onChange={changeHandler}
+							onChange={onChange}
 							type='text'
 							name='description'
 							id='description'
