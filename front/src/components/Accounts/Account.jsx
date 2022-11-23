@@ -2,6 +2,11 @@ import classes from './Account.module.css';
 
 export default function Account(props) {
 	const { name, type, amount, currency, description, id } = props.account;
+
+	function clickHandler(id) {
+		props.onDeleting();
+		props.onDelete(id);
+	}
 	return (
 		<li className={classes.account}>
 			<h4>
@@ -13,7 +18,7 @@ export default function Account(props) {
 			</p>
 			<p style={{ fontStyle: 'italic' }}>description: {description}</p>
 			<button onClick={() => props.onEditing(id)}>edit</button>
-			<button onClick={props.onDeleting}>delete</button>
+			<button onClick={() => clickHandler(id)}>delete</button>
 		</li>
 	);
 }

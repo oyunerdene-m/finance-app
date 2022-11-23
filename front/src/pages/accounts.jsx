@@ -50,13 +50,18 @@ export default function Accounts() {
 		setAccounts((prevAccounts) =>
 			prevAccounts.filter((account) => account.id !== deletedAccountId),
 		);
+		setIsDeleting(false);
 	}
 
 	return (
 		<>
 			{isDeleting && (
-				<Modal>
-					<Confirmation onDelete={deleteAccountHandler} name='account' />
+				<Modal onCancel={() => setIsDeleting(false)}>
+					<Confirmation
+						onCancel={() => setIsDeleting(false)}
+						onDelete={deleteAccountHandler}
+						name='account'
+					/>
 				</Modal>
 			)}
 			<div>
