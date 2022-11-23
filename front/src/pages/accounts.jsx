@@ -14,6 +14,7 @@ export default function Accounts() {
 	const [isEditing, setIsEditing] = useState(false);
 	const [isDeleting, setIsDeleting] = useState(false);
 	const [editedAccount, setEditedAccount] = useState();
+	const [deletedAccountId, setDeletedAccountId] = useState('');
 
 	async function addAccountHandler(accountData) {
 		const addedAccount = await addAccount(accountData);
@@ -44,17 +45,18 @@ export default function Accounts() {
 		setIsEditing(false);
 	}
 
-	async function deleteAccountHandler(id) {
-		await deleteAccount(id);
-		setAccounts((prevAccounts) => prevAccounts.filter((account) => account.id !== id));
+	async function deleteAccountHandler() {
+		await deleteAccount(deletedAccountId);
+		setAccounts((prevAccounts) =>
+			prevAccounts.filter((account) => account.id !== deletedAccountId),
+		);
 	}
-	console.log(isDeleting);
 
 	return (
 		<>
 			{isDeleting && (
 				<Modal>
-					<Confirmation name='account' />
+					<Confirmation onDelete={deleteAccountHandler} name='account' />
 				</Modal>
 			)}
 			<div>
@@ -65,7 +67,7 @@ export default function Accounts() {
 				<AccountList
 					accounts={accounts}
 					onEditing={editingAccount}
-					onDelete={deleteAccountHandler}
+					onDelete={setDeletedAccountId}
 					onDeleting={() => setIsDeleting(true)}
 				/>
 			</div>

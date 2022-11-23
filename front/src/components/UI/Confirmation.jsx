@@ -5,7 +5,7 @@ export default function Confirmation({ name, onDelete }) {
 		<div>
 			<p>Are you sure to delete this {name} ?</p>
 			<div className={classes.btns}>
-				<button onClick={() => onDelete}>Confirm</button>
+				<button onClick={onDelete}>Confirm</button>
 				<button>Cancel</button>
 			</div>
 		</div>
