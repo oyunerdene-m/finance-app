@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 export default function TransactionItem(props) {
 	const { id, date, category, type, from, to, amount, description } = props.transaction;
 	const { onDelete } = props;
-	console.log('froom item', type);
 	return (
 		<div className={classes.transaction}>
 			<li>
