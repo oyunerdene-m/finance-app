@@ -5,7 +5,7 @@ import TransactionForm from './TransactionForm';
 import { Navigate } from 'react-router-dom';
 
 export default function NewTansaction() {
-	const [transactionType, setTransactionType] = useState('');
+	const [transactionType, setTransactionType] = useState('income');
 	const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 	const [formData, setFormData] = useState({
 		date: '',
