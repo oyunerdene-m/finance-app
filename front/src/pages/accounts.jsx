@@ -5,11 +5,14 @@ import CreateAccount from '../components/Accounts/CreateAccount';
 import EditAccount from '../components/Accounts/EditAccount';
 import { Link } from 'react-router-dom';
 import AccountsContext from '../context/accounts-context';
+import Modal from '../components/UI/Modal';
+import Confirmation from '../components/UI/Confirmation';
 
 export default function Accounts() {
 	const { accounts, setAccounts } = useContext(AccountsContext);
 	const [isFormShow, setIsFormShow] = useState(false);
 	const [isEditing, setIsEditing] = useState(false);
+	const [isDeleting, setIsDeleting] = useState(false);
 	const [editedAccount, setEditedAccount] = useState();
 
 	async function addAccountHandler(accountData) {
@@ -45,9 +48,15 @@ export default function Accounts() {
 		await deleteAccount(id);
 		setAccounts((prevAccounts) => prevAccounts.filter((account) => account.id !== id));
 	}
+	console.log(isDeleting);
 
 	return (
 		<>
+			{isDeleting && (
+				<Modal>
+					<Confirmation name='account' />
+				</Modal>
+			)}
 			<div>
 				<Link to='/'>Home</Link>
 			</div>
@@ -57,6 +66,7 @@ export default function Accounts() {
 					accounts={accounts}
 					onEditing={editingAccount}
 					onDelete={deleteAccountHandler}
+					onDeleting={() => setIsDeleting(true)}
 				/>
 			</div>
 			<br />
