@@ -2,6 +2,7 @@ import classes from './TransactionForm.module.css';
 import { useContext } from 'react';
 import AccountsContext from '../../../context/accounts-context';
 import { categories } from '../../../lib/transactionData';
+import { Link } from 'react-router-dom';
 
 export default function TransactionForm({ type, onFormSubmit, onChange, formData }) {
 	const { accounts } = useContext(AccountsContext);
@@ -69,7 +70,6 @@ export default function TransactionForm({ type, onFormSubmit, onChange, formData
 			);
 		}
 	}
-
 	return (
 		<>
 			<div className={classes.transfer}>
@@ -116,9 +116,13 @@ export default function TransactionForm({ type, onFormSubmit, onChange, formData
 					</div>
 					<div>
 						<button>Save</button>
-						<a href=''>continue</a>
 					</div>
 				</form>
+				<button>
+					<Link style={{ textDecoration: 'none', color: 'black' }} to='/transactions'>
+						Cancel
+					</Link>
+				</button>
 			</div>
 		</>
 	);
