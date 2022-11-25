@@ -4,6 +4,7 @@ export default function Home() {
 	return (
 		<>
 			<h1>Finance App!!!!</h1>
+			<h2>Total balace:</h2>
 			<div>
 				<Link to='/accounts'>Accounts</Link>
 			</div>
@@ -12,9 +13,6 @@ export default function Home() {
 				<Link to='/transactions'>All transactions</Link>
 			</div>
 			<br />
-			<div>
-				<Link to='/transactions/new'>Add new transaction</Link>
-			</div>
 		</>
 	);
 }

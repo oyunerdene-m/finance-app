@@ -45,6 +45,7 @@ export default function NewTansaction() {
 
 	return (
 		<div>
+			<h3>Add new transaction:</h3>
 			<TransactionButtons transactionType={transactionType} onType={clickHandler} />
 			{transactionType.length > 0 && (
 				<TransactionForm
