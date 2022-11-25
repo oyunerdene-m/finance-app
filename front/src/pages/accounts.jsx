@@ -64,10 +64,7 @@ export default function Accounts() {
 					/>
 				</Modal>
 			)}
-			<div>
-				<Link to='/'>Home</Link>
-			</div>
-			<br />
+
 			<div>
 				<AccountList
 					accounts={accounts}

@@ -73,7 +73,6 @@ export default function TransactionForm({ type, onFormSubmit, onChange, formData
 	return (
 		<>
 			<div className={classes.transfer}>
-				<h3>Make a {type}</h3>
 				<form onSubmit={(e) => onFormSubmit(e)}>
 					<div>
 						<label htmlFor='date'>Date: </label>
