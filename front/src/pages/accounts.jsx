@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import { addAccount, editAccount, deleteAccount } from '../lib/accountData';
-import AccountList from '../components/Accounts/AccountList';
-import CreateAccount from '../components/Accounts/CreateAccount';
+import AccountList from '../components/Accounts/Accounts/AccountList';
+import CreateAccount from '../components/Accounts/NewAccount/CreateAccount';
 import EditAccount from '../components/Accounts/EditAccount';
 import { Link } from 'react-router-dom';
 import AccountsContext from '../context/accounts-context';
