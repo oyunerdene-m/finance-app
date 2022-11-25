@@ -12,7 +12,7 @@ import { BrowserRouter as Router, Route, Link, Routes, Navigate } from 'react-ro
 
 function App() {
 	const [users, setUsers] = useState([]);
-	const [currentUser, setCurrentUser] = useState({ name: 'Max', password: 'max123' });
+	const [currentUser, setCurrentUser] = useState();
 	const [errorMessage, setErrorMessage] = useState('');
 	const [hideSignup, setHideSignup] = useState(false);
 
