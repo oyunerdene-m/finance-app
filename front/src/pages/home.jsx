@@ -1,17 +1,15 @@
-import { Link } from 'react-router-dom';
+import Accounts from './accounts';
+import Transactions from './transactions';
 
 export default function Home() {
 	return (
 		<>
 			<h1>Finance App!!!!</h1>
-			<h2>Total balace:</h2>
-			<div>
-				<Link to='/accounts'>Accounts</Link>
-			</div>
-			<br />
-			<div>
-				<Link to='/transactions'>All transactions</Link>
-			</div>
+			<h3>Total balance:</h3>
+			<h3>Accounts:</h3>
+			<Accounts />
+			<h3>Last transactions:</h3>
+			<Transactions />
 			<br />
 		</>
 	);
