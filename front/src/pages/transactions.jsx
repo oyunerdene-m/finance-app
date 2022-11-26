@@ -23,6 +23,7 @@ export default function Transactions() {
 
 	return (
 		<div>
+			<h3>Last transactions:</h3>
 			<div>
 				<Link to='/transactions/new'>New transaction</Link>
 			</div>

@@ -6,9 +6,8 @@ export default function Home() {
 		<>
 			<h1>Finance App!!!!</h1>
 			<h3>Total balance:</h3>
-			<h3>Accounts:</h3>
+
 			<Accounts />
-			<h3>Last transactions:</h3>
 			<Transactions />
 			<br />
 		</>

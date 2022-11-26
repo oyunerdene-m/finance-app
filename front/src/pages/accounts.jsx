@@ -65,6 +65,7 @@ export default function Accounts() {
 			)}
 
 			<div>
+				<h3>Accounts:</h3>
 				<AccountList
 					accounts={accounts}
 					onEditing={editingAccount}
