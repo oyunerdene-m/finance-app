@@ -36,6 +36,32 @@ app.post('/api/v1/users/register', async (req, res, next) => {
   }
 });
 
+app.get('/api/v1/users/current-user', async (req, res, next) => {
+  try {
+    res.json({ data: { user: req.session.user || null } });
+  } catch (error) {
+    next(error);
+  }
+});
+
+app.get('/api/v1/users/logout', async (req, res, next) => {
+  try {
+    if (req.session.user) {
+      req.session.user = undefined;
+
+      req.session.save(function (err) {
+        if (err) return next(err);
+        res.json({ data: { done: true } });
+      });
+      return;
+    }
+
+    res.json({ data: { done: true } });
+  } catch (error) {
+    next(error);
+  }
+});
+
 app.post('/api/v1/users/login', async (req, res, next) => {
   try {
     if (req.session.user) {
