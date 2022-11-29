@@ -6,6 +6,7 @@ import AccountsContext from '../context/accounts-context';
 
 export default function Home({ currentUser }) {
 	const { accounts } = useContext(AccountsContext);
+
 	let totalEur = 0;
 	let totalDollar = 0;
 	let totalTugrug = 0;
@@ -18,6 +19,7 @@ export default function Home({ currentUser }) {
 			totalEur += el.amount;
 		}
 	}
+
 	return (
 		<>
 			{currentUser !== null ? (
