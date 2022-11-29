@@ -6,24 +6,12 @@ import NewTransaction from './components/Transactions/NewTransaction/NewTransact
 import EditTransaction from './components/Transactions/EditTransaction';
 import Signup from './components/Users/SignUp';
 import Login from './components/Users/Login';
-import { useState, useEffect } from 'react';
+import { useContext } from 'react';
 import { BrowserRouter as Router, Route, Link, Routes } from 'react-router-dom';
+import CurrentUserContext from './context/currentUser-context';
 
 function App() {
-	const [currentUser, setCurrentUser] = useState('');
-
-	useEffect(() => {
-		async function getCurrentUser() {
-			const response = await fetch('/api/v1/users/current-user');
-			if (!response.ok) {
-				const message = `Error ocuured in ${response.status}`;
-				throw new Error(message);
-			}
-			const res = await response.json();
-			setCurrentUser(res.data.user);
-		}
-		getCurrentUser();
-	}, []);
+	const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
 	async function logoutHandler() {
 		const response = await fetch('/api/v1/users/logout');

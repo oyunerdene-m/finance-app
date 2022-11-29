@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { addAccount, editAccount, deleteAccount } from '../lib/accountData';
+import { deleteAccount } from '../lib/accountData';
 import AccountList from '../components/Accounts/Accounts/AccountList';
 import CreateAccount from '../components/Accounts/NewAccount/CreateAccount';
 import EditAccount from '../components/Accounts/EditAccount';
@@ -50,12 +50,31 @@ export default function Accounts() {
 	}
 
 	async function editAccountHandler(id, editedAccountData) {
-		const updatedAccount = await editAccount(id, editedAccountData);
-		setAccounts((prevAccounts) =>
-			prevAccounts.map((account) => {
-				return account.id === id ? updatedAccount : account;
-			}),
-		);
+		const response = await fetch('/api/v1/accounts/edit/' + id, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(editedAccountData),
+		});
+
+		if (!response.ok) {
+			const message = `Error occured in ${response.status}`;
+			throw new Error(message);
+		}
+		const data = await response.json();
+
+		if (data.error) {
+			alert(data.error);
+		} else {
+			const updatedAccount = data.data.account;
+			setAccounts((prevAccounts) =>
+				prevAccounts.map((account) => {
+					return account.id === id ? updatedAccount : account;
+				}),
+			);
+		}
+
 		setIsEditing(false);
 	}
 
