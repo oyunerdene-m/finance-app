@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import Form from './Form';
+import { Navigate } from 'react-router-dom';
 
-export default function SignUp({ onSignUp }) {
-	const [user, setUser] = useState({ name: '', password: '' });
+export default function SignUp() {
+	const [user, setUser] = useState({ name: '', email: '', password: '' });
+	const [isSignedUp, setIsSignedUp] = useState(false);
 
 	function changeHandler(event) {
 		setUser((prevUser) => {
@@ -13,14 +15,36 @@ export default function SignUp({ onSignUp }) {
 		});
 	}
 
-	function submitHandler(event) {
+	async function submitHandler(event) {
 		event.preventDefault();
-		onSignUp(user);
+		const response = await fetch('/api/v1/users/register', {
+			method: 'POST', // or 'PUT'
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(user),
+		});
+		if (!response.ok) {
+			const message = `An error has occured: ${response.status}`;
+			throw new Error(message);
+		}
+		const data = await response.json();
+
+		if (data.error) {
+			alert(data.error);
+		} else {
+			setIsSignedUp(true);
+		}
+		console.log(data);
 	}
 
 	return (
 		<>
-			<Form onFormSubmit={submitHandler} onInputChange={changeHandler} />
+			{isSignedUp ? (
+				<Navigate to='/' replace={true} />
+			) : (
+				<Form formType='Signup' onFormSubmit={submitHandler} onInputChange={changeHandler} />
+			)}
 		</>
 	);
 }

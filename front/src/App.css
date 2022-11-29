@@ -2,3 +2,7 @@
   text-align: center;
   padding:20px 40px
 }
+
+ul li {
+    list-style: none;
+}
