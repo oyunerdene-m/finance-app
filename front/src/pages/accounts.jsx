@@ -16,8 +16,23 @@ export default function Accounts() {
 	const [deletedAccountId, setDeletedAccountId] = useState('');
 
 	async function addAccountHandler(accountData) {
-		const addedAccount = await addAccount(accountData);
-		setAccounts((prevAccounts) => [...prevAccounts, addedAccount]);
+		const response = await fetch('/api/v1/accounts/add', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(accountData),
+		});
+		if (!response.ok) {
+			const message = `Error occured in ${response.status}`;
+			throw new Error(message);
+		}
+		const data = await response.json();
+		if (data.error) {
+			alert(data.error);
+		} else {
+			setAccounts([...accounts, data.data.account]);
+		}
 		setIsFormShow(false);
 	}
 
