@@ -34,7 +34,6 @@ export default function Login({ setCurrentUser }) {
 			setCurrentUser(data.data.user);
 			setIsLogged(true);
 		}
-		console.log(data);
 	}
 
 	return (

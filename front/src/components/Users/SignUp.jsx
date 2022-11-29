@@ -35,7 +35,6 @@ export default function SignUp() {
 		} else {
 			setIsSignedUp(true);
 		}
-		console.log(data);
 	}
 
 	return (
