@@ -18,7 +18,7 @@ export default function EditTransaction() {
 			setEditedTransaction(transaction);
 		}
 		fetchData();
-	}, []);
+	}, [id]);
 
 	function changeHandler(event) {
 		setEditedTransaction((prevTransaction) => ({
@@ -41,7 +41,7 @@ export default function EditTransaction() {
 	}
 
 	if (editedTransaction === undefined || accounts.length <= 0) return <h1>Loading...</h1>;
-	if (isSubmitted) return <Navigate to='/transactions' />;
+	if (isSubmitted) return <Navigate to='/' />;
 	return (
 		<div className={classes.transfer}>
 			<TransactionButtons transactionType={editedTransaction.type} onType={typeSelectHandler} />

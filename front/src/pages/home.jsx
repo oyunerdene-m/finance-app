@@ -1,15 +1,20 @@
 import Accounts from './accounts';
 import Transactions from './transactions';
+import Login from '../components/Users/Login';
 
-export default function Home() {
+export default function Home({ currentUser }) {
 	return (
 		<>
-			<h1>Finance App!!!!</h1>
-			<h3>Total balance:</h3>
-
-			<Accounts />
-			<Transactions />
-			<br />
+			{currentUser !== null ? (
+				<>
+					<h1>Finance App!!!!</h1>
+					<h3>Total balance:</h3>
+					<Accounts />
+					<Transactions />
+				</>
+			) : (
+				<Login />
+			)}
 		</>
 	);
 }
