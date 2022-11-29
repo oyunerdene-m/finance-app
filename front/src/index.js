@@ -3,10 +3,13 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import { AccountsContextProvider } from './context/accounts-context';
+import { CurrentUserProvider } from './context/currentUser-context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-	<AccountsContextProvider>
-		<App />
-	</AccountsContextProvider>,
+	<CurrentUserProvider>
+		<AccountsContextProvider>
+			<App />
+		</AccountsContextProvider>
+	</CurrentUserProvider>,
 );
