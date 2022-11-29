@@ -74,15 +74,32 @@ export default function Accounts() {
 				}),
 			);
 		}
-
 		setIsEditing(false);
 	}
 
 	async function deleteAccountHandler() {
-		await deleteAccount(deletedAccountId);
-		setAccounts((prevAccounts) =>
-			prevAccounts.filter((account) => account.id !== deletedAccountId),
-		);
+		//await deleteAccount(deletedAccountId);
+		const response = await fetch('/api/v1/accounts/delete/' + deletedAccountId, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+		});
+
+		if (!response.ok) {
+			const message = `Error occured in ${response.status}`;
+			throw new Error(message);
+		}
+		const data = await response.json();
+
+		if (data.error) {
+			alert(data.error);
+		} else {
+			setAccounts((prevAccounts) =>
+				prevAccounts.filter((account) => account.id !== deletedAccountId),
+			);
+		}
+
 		setIsDeleting(false);
 	}
 
