@@ -1,6 +1,5 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
-import { getTransactionById, editTransaction } from '../../lib/transactionData';
 import TransactionButtons from './NewTransaction/TransactionButtons';
 import TransactionForm from './NewTransaction/TransactionForm';
 import classes from './NewTransaction/TransactionForm.module.css';
@@ -13,11 +12,29 @@ export default function EditTransaction() {
 	const { id } = useParams();
 
 	useEffect(() => {
-		async function fetchData() {
-			const transaction = await getTransactionById(id);
-			setEditedTransaction(transaction);
+		async function getTransactionById() {
+			const response = await fetch(`/api/v1/transactions/detail/${id}`, {
+				method: 'GET',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: undefined,
+			});
+
+			if (!response.ok) {
+				const message = `Error occured in ${response.status}`;
+				throw new Error(message);
+			}
+			const data = await response.json();
+
+			if (data.error) {
+				alert(data.error);
+			} else {
+				setEditedTransaction(data.data.transaction);
+			}
 		}
-		fetchData();
+
+		getTransactionById();
 	}, [id]);
 
 	function changeHandler(event) {
@@ -29,7 +46,22 @@ export default function EditTransaction() {
 
 	async function submitHandler(event) {
 		event.preventDefault();
-		await editTransaction(id, editedTransaction);
+		const response = await fetch(`/api/v1/transactions/edit/${id}`, {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(editedTransaction),
+		});
+
+		if (!response.ok) {
+			const message = `Error occured in ${response.status}`;
+			throw new Error(message);
+		}
+		const data = await response.json();
+		if (data.error) {
+			alert(data.error);
+		}
 		setIsSubmitted(true);
 	}
 

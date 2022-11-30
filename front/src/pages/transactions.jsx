@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getTransactions, deleteTransaction } from '../lib/transactionData';
+import { deleteTransaction } from '../lib/transactionData';
 import TransactionList from '../components/Transactions/Transactions/TransactionList';
 
 export default function Transactions() {
@@ -8,8 +8,15 @@ export default function Transactions() {
 
 	useEffect(() => {
 		async function fetchData() {
-			const data = await getTransactions();
-			setTransactions(data);
+			const response = await fetch('/api/v1/transactions');
+
+			if (!response.ok) {
+				const message = `Error occured in ${response.status}`;
+				throw new Error(message);
+			}
+			const res = await response.json();
+
+			setTransactions(res.data.transactions);
 		}
 		fetchData();
 	}, []);

@@ -1,5 +1,4 @@
 import { useState, useContext } from 'react';
-import { deleteAccount } from '../lib/accountData';
 import AccountList from '../components/Accounts/Accounts/AccountList';
 import CreateAccount from '../components/Accounts/NewAccount/CreateAccount';
 import EditAccount from '../components/Accounts/EditAccount';
@@ -50,7 +49,7 @@ export default function Accounts() {
 	}
 
 	async function editAccountHandler(id, editedAccountData) {
-		const response = await fetch('/api/v1/accounts/edit/' + id, {
+		const response = await fetch(`/api/v1/accounts/edit/${id}`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -78,8 +77,7 @@ export default function Accounts() {
 	}
 
 	async function deleteAccountHandler() {
-		//await deleteAccount(deletedAccountId);
-		const response = await fetch('/api/v1/accounts/delete/' + deletedAccountId, {
+		const response = await fetch(`/api/v1/accounts/delete/${deletedAccountId}`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
@@ -99,7 +97,6 @@ export default function Accounts() {
 				prevAccounts.filter((account) => account.id !== deletedAccountId),
 			);
 		}
-
 		setIsDeleting(false);
 	}
 
