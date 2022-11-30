@@ -71,4 +71,18 @@ async function editTransaction(userId: number, id: number, transactionData: NoId
   return updatedTransaction;
 }
 
-export { Transaction, getTransactions, addTransaction, editTransaction };
+async function getTransactionById(userId: number, id: number) {
+    const idx = transactions.findIndex((a) => a.id === id);
+    if (idx === -1) {
+      throw new Error('Transaction not found');
+    }
+  
+    if (transactions[idx].userId !== userId) {
+      throw new Error('Transaction not found');
+    }
+  
+    return transactions[idx];
+  }
+  
+
+export { Transaction, getTransactions, addTransaction, editTransaction, getTransactionById };
