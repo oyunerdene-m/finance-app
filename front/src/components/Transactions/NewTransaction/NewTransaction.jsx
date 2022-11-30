@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { addTransaction } from '../../../lib/transactionData';
 import TransactionButtons from './TransactionButtons';
 import TransactionForm from './TransactionForm';
 import { Navigate } from 'react-router-dom';
@@ -38,7 +37,23 @@ export default function NewTansaction() {
 
 	async function submitHandler(e) {
 		e.preventDefault();
-		await addTransaction(formData);
+		const response = await fetch('/api/v1/transactions/add', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json',
+			},
+			body: JSON.stringify(formData),
+		});
+
+		if (!response.ok) {
+			const message = `Error occured in ${response.status}`;
+			throw new Error(message);
+		}
+
+		const res = await response.json();
+		if (res.error) {
+			alert(res.error);
+		}
 		setFormData({ date: '', type: '', from: '', to: '', category: '', amount: 0, description: '' });
 		setIsFormSubmitted(true);
 	}
