@@ -1,7 +1,7 @@
 import express from 'express';
 
 import { addAccount, deleteAccount, editAccount, getAccounts } from './accounts';
-import { addTransaction, editTransaction, getTransactions } from './transactions';
+import { addTransaction, editTransaction, getTransactions, getTransactionById } from './transactions';
 
 const router = express.Router();
 
@@ -77,4 +77,13 @@ router.post('/transactions/edit/:id', async (req, res, next) => {
   }
 });
 
+router.get('/transactions/detail/:id', async (req, res, next) => {
+    try {
+      const transaction = await getTransactionById(req.session.user!.id, parseInt(req.params.id));
+      res.json({ data: { transaction } });
+    } catch (error) {
+      next(error);
+    }
+  });
+  
 export default router;
