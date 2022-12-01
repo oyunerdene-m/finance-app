@@ -6,6 +6,7 @@ import fetchData from '../../lib/fetchData';
 export default function Login({ setCurrentUser }) {
 	const [user, setUser] = useState({ email: '', password: '' });
 	const [isLogged, setIsLogged] = useState(false);
+
 	function changeHandler(event) {
 		setUser((prevUser) => {
 			return {
@@ -18,7 +19,7 @@ export default function Login({ setCurrentUser }) {
 	async function submitHandler(event) {
 		event.preventDefault();
 		try {
-			const response = fetchData('/api/v1/users/login', 'POST', user);
+			const response = await fetchData('/api/v1/users/login', 'POST', user);
 			setCurrentUser(response.user);
 			setIsLogged(true);
 		} catch (error) {
