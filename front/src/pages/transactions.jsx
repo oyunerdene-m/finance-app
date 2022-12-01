@@ -12,7 +12,7 @@ export default function Transactions() {
 				const response = await fetchData('/api/v1/transactions', 'GET', undefined);
 				setTransactions(response.transactions);
 			} catch (error) {
-				console.log(error);
+				console.error(error);
 				alert(error);
 			}
 		}
