@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { deleteTransaction } from '../lib/transactionData';
 import TransactionList from '../components/Transactions/Transactions/TransactionList';
 
 export default function Transactions() {
@@ -21,13 +20,6 @@ export default function Transactions() {
 		fetchData();
 	}, []);
 
-	async function deleteTransactionHandler(id) {
-		await deleteTransaction(id);
-		setTransactions((prevTransactions) =>
-			prevTransactions.filter((transaction) => transaction.id !== Number(id)),
-		);
-	}
-
 	return (
 		<div>
 			<h3>Last transactions:</h3>
@@ -35,7 +27,7 @@ export default function Transactions() {
 				<Link to='/transactions/new'>New transaction</Link>
 			</div>
 			<br />
-			<TransactionList onDelete={deleteTransactionHandler} transactions={transactions} />
+			<TransactionList transactions={transactions} />
 		</div>
 	);
 }
