@@ -41,7 +41,7 @@ export default function NewTansaction() {
 		try {
 			await fetchData('/api/v1/transactions/add', 'POST', formData);
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 			alert(error);
 		}
 		setFormData({ date: '', type: '', from: '', to: '', category: '', amount: 0, description: '' });
