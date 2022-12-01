@@ -5,6 +5,7 @@ import EditAccount from '../components/Accounts/EditAccount';
 import AccountsContext from '../context/accounts-context';
 import Modal from '../components/UI/Modal';
 import Confirmation from '../components/UI/Confirmation';
+import fetchData from '../lib/fetchData';
 
 export default function Accounts() {
 	const { accounts, setAccounts } = useContext(AccountsContext);
@@ -15,22 +16,12 @@ export default function Accounts() {
 	const [deletedAccountId, setDeletedAccountId] = useState('');
 
 	async function addAccountHandler(accountData) {
-		const response = await fetch('/api/v1/accounts/add', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(accountData),
-		});
-		if (!response.ok) {
-			const message = `Error occured in ${response.status}`;
-			throw new Error(message);
-		}
-		const data = await response.json();
-		if (data.error) {
-			alert(data.error);
-		} else {
-			setAccounts([...accounts, data.data.account]);
+		try {
+			const response = await fetchData('/api/v1/accounts/add', 'POST', accountData);
+			setAccounts([...accounts, response.account]);
+		} catch (error) {
+			console.error(error);
+			alert(error);
 		}
 		setIsFormShow(false);
 	}
@@ -49,53 +40,29 @@ export default function Accounts() {
 	}
 
 	async function editAccountHandler(id, editedAccountData) {
-		const response = await fetch(`/api/v1/accounts/edit/${id}`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(editedAccountData),
-		});
-
-		if (!response.ok) {
-			const message = `Error occured in ${response.status}`;
-			throw new Error(message);
-		}
-		const data = await response.json();
-
-		if (data.error) {
-			alert(data.error);
-		} else {
-			const updatedAccount = data.data.account;
+		try {
+			const response = await fetchData(`/api/v1/accounts/edit/${id}`, 'POST', editedAccountData);
 			setAccounts((prevAccounts) =>
 				prevAccounts.map((account) => {
-					return account.id === id ? updatedAccount : account;
+					return account.id === id ? response.account : account;
 				}),
 			);
+		} catch (error) {
+			console.error(error);
+			alert(error);
 		}
 		setIsEditing(false);
 	}
 
 	async function deleteAccountHandler() {
-		const response = await fetch(`/api/v1/accounts/delete/${deletedAccountId}`, {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-			},
-		});
-
-		if (!response.ok) {
-			const message = `Error occured in ${response.status}`;
-			throw new Error(message);
-		}
-		const data = await response.json();
-
-		if (data.error) {
-			alert(data.error);
-		} else {
+		try {
+			await fetchData(`/api/v1/accounts/delete/${deletedAccountId}`, 'POST', undefined);
 			setAccounts((prevAccounts) =>
 				prevAccounts.filter((account) => account.id !== deletedAccountId),
 			);
+		} catch (error) {
+			console.error(error);
+			alert(error);
 		}
 		setIsDeleting(false);
 	}

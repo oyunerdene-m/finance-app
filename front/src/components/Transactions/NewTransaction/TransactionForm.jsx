@@ -1,7 +1,7 @@
 import classes from './TransactionForm.module.css';
 import { useContext } from 'react';
 import AccountsContext from '../../../context/accounts-context';
-import { categories } from '../../../utility/transactionCategories';
+import { categories } from '../../../lib/transactionCategories';
 import { Link } from 'react-router-dom';
 
 export default function TransactionForm({ type, onFormSubmit, onChange, formData }) {

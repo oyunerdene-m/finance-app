@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 
 export default function TransactionItem(props) {
 	const { id, date, category, type, from, to, amount, description } = props.transaction;
-	const { onDelete } = props;
 	return (
 		<div className={classes.transaction}>
 			<li>
@@ -27,13 +26,6 @@ export default function TransactionItem(props) {
 					<Link to={`/transactions/edit/${id}`}>
 						<button style={{ margin: '10px' }}>edit</button>
 					</Link>
-					<button
-						onClick={() => {
-							onDelete(id);
-						}}
-					>
-						delete
-					</button>
 				</div>
 			</li>
 		</div>

@@ -1,4 +1,5 @@
 import { useState, useEffect, createContext } from 'react';
+import fetchData from '../lib/fetchData';
 
 const CurrentUserContext = createContext({ currentUser: '' });
 
@@ -7,14 +8,13 @@ export const CurrentUserProvider = (props) => {
 
 	useEffect(() => {
 		async function getCurrentUser() {
-			const response = await fetch('/api/v1/users/current-user');
-			if (!response.ok) {
-				const message = `Error occured in ${response.status}`;
-				throw new Error(message);
+			try {
+				const response = await fetchData('/api/v1/users/current-user', 'GET', undefined);
+				setCurrentUser(response.user);
+			} catch (error) {
+				console.error(error);
+				alert(error);
 			}
-			const res = await response.json();
-
-			setCurrentUser(res.data.user);
 		}
 		getCurrentUser();
 	}, []);

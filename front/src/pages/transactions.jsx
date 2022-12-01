@@ -1,23 +1,22 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import TransactionList from '../components/Transactions/Transactions/TransactionList';
+import fetchData from '../lib/fetchData';
 
 export default function Transactions() {
 	const [transactions, setTransactions] = useState([]);
 
 	useEffect(() => {
-		async function fetchData() {
-			const response = await fetch('/api/v1/transactions');
-
-			if (!response.ok) {
-				const message = `Error occured in ${response.status}`;
-				throw new Error(message);
+		async function getTransactions() {
+			try {
+				const response = await fetchData('/api/v1/transactions', 'GET', undefined);
+				setTransactions(response.transactions);
+			} catch (error) {
+				console.log(error);
+				alert(error);
 			}
-			const res = await response.json();
-
-			setTransactions(res.data.transactions);
 		}
-		fetchData();
+		getTransactions();
 	}, []);
 
 	return (

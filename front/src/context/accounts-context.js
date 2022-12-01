@@ -1,4 +1,5 @@
 import { useState, useEffect, createContext } from 'react';
+import fetchData from '../lib/fetchData';
 
 const AccountsContext = createContext({
 	accounts: [],
@@ -9,19 +10,14 @@ export const AccountsContextProvider = (props) => {
 
 	useEffect(() => {
 		async function getAccounts() {
-			const response = await fetch('/api/v1/accounts');
-			if (!response.ok) {
-				const message = `Error occured in ${response.status}`;
-				throw new Error(message);
-			}
-			const data = await response.json();
-			if (data.error) {
-				alert(data.error);
-			} else {
-				setAccounts(data.data.accounts);
+			try {
+				const response = await fetchData('/api/v1/accounts', 'GET', undefined);
+				setAccounts(response.accounts);
+			} catch (error) {
+				console.error(error);
+				alert(error);
 			}
 		}
-
 		getAccounts();
 	}, []);
 
