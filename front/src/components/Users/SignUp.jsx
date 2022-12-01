@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Form from './Form';
 import { Navigate } from 'react-router-dom';
+import fetchData from '../../lib/fetchData';
 
 export default function SignUp() {
 	const [user, setUser] = useState({ name: '', email: '', password: '' });
@@ -17,23 +18,12 @@ export default function SignUp() {
 
 	async function submitHandler(event) {
 		event.preventDefault();
-		const response = await fetch('/api/v1/users/register', {
-			method: 'POST', // or 'PUT'
-			headers: {
-				'Content-Type': 'application/json',
-			},
-			body: JSON.stringify(user),
-		});
-		if (!response.ok) {
-			const message = `An error has occured: ${response.status}`;
-			throw new Error(message);
-		}
-		const data = await response.json();
-
-		if (data.error) {
-			alert(data.error);
-		} else {
+		try {
+			await fetchData('/api/v1/users/register', 'POST', user);
 			setIsSignedUp(true);
+		} catch (error) {
+			console.error(error);
+			alert(error);
 		}
 	}
 

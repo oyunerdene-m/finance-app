@@ -12,11 +12,11 @@ export default function Home({ currentUser }) {
 	let totalTugrug = 0;
 	for (let el of accounts) {
 		if (el.currency === '$') {
-			totalDollar += el.amount;
+			totalDollar += parseInt(el.amount);
 		} else if (el.currency === '₮') {
-			totalTugrug += el.amount;
+			totalTugrug += parseInt(el.amount);
 		} else {
-			totalEur += el.amount;
+			totalEur += parseInt(el.amount);
 		}
 	}
 
