@@ -24,7 +24,7 @@ function App() {
 		<Router>
 			<div
 				style={{ border: '1px solid red' }}
-				className='container text-center flex p-5 columns-auto font-poppins text-dark-blue'
+				className='container text-center flex p-5 columns-auto font-poppins text-dark-blue bg-background-color'
 			>
 				<div className='flex flex-col p-10' style={{ border: '1px solid green' }}>
 					<nav>

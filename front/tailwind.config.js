@@ -12,8 +12,11 @@ module.exports = {
 			'light-blue': '#37397c',
 			'dark-blue': '#06084c',
 			'more-blue': '#070945',
+			'card-blue': '#20234b',
 			'light-gray': '#e9e9ed',
 			'more-gray': '#b0afc0',
+			white: '#fff',
+			'background-color': '#f8f8f8',
 		},
 
 		screens: {
