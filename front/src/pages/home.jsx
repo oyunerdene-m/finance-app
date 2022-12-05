@@ -23,15 +23,35 @@ export default function Home({ currentUser }) {
 	return (
 		<>
 			{currentUser !== null ? (
-				<>
-					<h1>Finance App!!!!</h1>
-					<h3>
-						Total balance: <i>€{totalEur}</i>, <i>${totalDollar}</i>, <i>₮{totalTugrug}</i>
-					</h3>
-
-					<Accounts />
-					<Transactions />
-				</>
+				<div style={{ border: '1px solid black' }} className='flex flex-col p-10 text-left'>
+					<div className='mb-5'>
+						<p className='mb-2'>Total balance</p>
+						<div className='text-xl'>
+							{' '}
+							<span>€{totalEur}</span>, <span>${totalDollar}</span>, <span>₮{totalTugrug}</span>
+						</div>
+					</div>
+					<div className='flex justify-between pb-6 border-b-[1px] border-light-gray'>
+						<div>
+							<p className='text-more-gray'>Income</p>
+							<span>$3600</span>
+						</div>
+						<div>
+							<p className='text-more-gray'>Expense</p>
+							<span>$560</span>
+						</div>
+						<div>
+							<p className='text-more-gray'>Credit Limit</p>
+							<span>$1000</span>
+						</div>
+					</div>
+					<div className='pt-7 pb-7 border-b-[1px] border-light-gray'>
+						<Accounts />
+					</div>
+					<div className='pt-7'>
+						<Transactions />
+					</div>
+				</div>
 			) : (
 				<Login />
 			)}

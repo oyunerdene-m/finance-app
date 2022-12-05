@@ -1,8 +1,7 @@
 import { useState } from 'react';
-import Modal from '../UI/Modal';
 import AccountForm from './NewAccount/AccountForm';
 
-export default function EditAccount({ account, onEditAccount, onCancel }) {
+export default function EditAccount({ account, onEditAccount, onCloseForm }) {
 	const [editedAccount, setEditedAccount] = useState({
 		name: account.name,
 		amount: account.amount,
@@ -26,15 +25,16 @@ export default function EditAccount({ account, onEditAccount, onCancel }) {
 	}
 
 	return (
-		<Modal onCancel={onCancel}>
+		// <Modal onCancel={onCancel}>
+
+		<div>
 			<AccountForm
+				onCloseForm={onCloseForm}
 				onChangeInput={changeHandler}
 				onSubmitForm={submitHandler}
 				accountData={editedAccount}
 			/>
-			<button type='text' onClick={onCancel}>
-				Cancel
-			</button>
-		</Modal>
+		</div>
+		// </Modal>
 	);
 }
