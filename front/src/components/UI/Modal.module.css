@@ -1,4 +1,4 @@
-.backdrop {
+/* .backdrop {
     position: fixed;
     top: 0;
     left: 0;
@@ -7,8 +7,8 @@
     z-index: 10;
     background: rgba(0, 0, 0, 0.75);
   }
-  
-.modal {
+   */
+/* .modal {
 position: relative;
 bottom: 10vh;
 width: 80%;
@@ -20,11 +20,11 @@ width: 20%;
 padding: 20px 0;
 margin:0 auto;
 
-}
+} */
 
-
+/* 
 .modal .cancel {
     top: 4px;
     right: 4px;
     cursor: pointer;
-}
+} */
