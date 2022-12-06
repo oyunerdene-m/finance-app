@@ -2,7 +2,6 @@ import { useState, useEffect, useContext } from 'react';
 import { useParams, Navigate } from 'react-router-dom';
 import TransactionButtons from './NewTransaction/TransactionButtons';
 import TransactionForm from './NewTransaction/TransactionForm';
-import classes from './NewTransaction/TransactionForm.module.css';
 import AccountsContext from '../../context/accounts-context';
 import fetchData from '../../lib/fetchData';
 
@@ -53,7 +52,7 @@ export default function EditTransaction() {
 	if (editedTransaction === undefined || accounts.length <= 0) return <h1>Loading...</h1>;
 	if (isSubmitted) return <Navigate to='/' />;
 	return (
-		<div className={classes.transfer}>
+		<div style={{ border: '1px solid blue' }}>
 			<TransactionButtons transactionType={editedTransaction.type} onType={typeSelectHandler} />
 			<TransactionForm
 				type={editedTransaction.type}
