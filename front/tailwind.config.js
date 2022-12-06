@@ -17,6 +17,7 @@ module.exports = {
 			'more-gray': '#b0afc0',
 			white: '#fff',
 			'background-color': '#f8f8f8',
+			'light-purple': '#50578b',
 		},
 
 		screens: {

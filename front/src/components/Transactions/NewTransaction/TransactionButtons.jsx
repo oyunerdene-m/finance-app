@@ -4,28 +4,42 @@ export default function TransactionButtons({ onType, transactionType }) {
 	}
 
 	return (
-		<div>
-			<button
-				style={{ background: transactionType === 'income' && '#00c0ff' }}
-				name='income'
-				onClick={clickHandler}
-			>
-				Income
-			</button>
-			<button
-				style={{ background: transactionType === 'expense' && '#00c0ff' }}
-				name='expense'
-				onClick={clickHandler}
-			>
-				Expense
-			</button>
-			<button
-				style={{ background: transactionType === 'transfer' && '#00c0ff' }}
-				name='transfer'
-				onClick={clickHandler}
-			>
-				Transfer
-			</button>
+		<div className='w-full max-w-md px-2 py-4 sm:px-0'>
+			<div className='flex space-x-1 rounded-xl bg-light-purple p-1'>
+				<button
+					className='w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-white'
+					style={{
+						background: transactionType === 'income' && '#fff',
+						color: transactionType === 'income' && '#06084c',
+					}}
+					name='income'
+					onClick={clickHandler}
+				>
+					Income
+				</button>
+				<button
+					className='w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-white'
+					style={{
+						background: transactionType === 'expense' && '#fff',
+						color: transactionType === 'expense' && '#06084c',
+					}}
+					name='expense'
+					onClick={clickHandler}
+				>
+					Expense
+				</button>
+				<button
+					className='w-full rounded-lg py-2.5 text-sm font-medium leading-5 text-white'
+					style={{
+						background: transactionType === 'transfer' && '#fff',
+						color: transactionType === 'transfer' && '#06084c',
+					}}
+					name='transfer'
+					onClick={clickHandler}
+				>
+					Transfer
+				</button>
+			</div>
 		</div>
 	);
 }
