@@ -49,7 +49,7 @@ export default function NewTansaction() {
 	}
 
 	return (
-		<div>
+		<div style={{ border: '1px solid blue' }}>
 			<h3>Add new transaction:</h3>
 			<TransactionButtons transactionType={transactionType} onType={clickHandler} />
 			{transactionType.length > 0 && (
