@@ -49,18 +49,20 @@ export default function NewTansaction() {
 	}
 
 	return (
-		<div style={{ border: '1px solid blue' }}>
-			<h3>Add new transaction:</h3>
-			<TransactionButtons transactionType={transactionType} onType={clickHandler} />
-			{transactionType.length > 0 && (
-				<TransactionForm
-					type={transactionType}
-					onFormSubmit={submitHandler}
-					onChange={changeHandler}
-					formData={formData}
-				/>
-			)}
-			{isFormSubmitted && <Navigate to='/transactions' replace={true} />}
+		<div style={{ border: '1px solid yellow' }} className='w-full flex  justify-center'>
+			<div style={{ border: '1px solid blue' }}>
+				<h3>Add new transaction:</h3>
+				<TransactionButtons transactionType={transactionType} onType={clickHandler} />
+				{transactionType.length > 0 && (
+					<TransactionForm
+						type={transactionType}
+						onFormSubmit={submitHandler}
+						onChange={changeHandler}
+						formData={formData}
+					/>
+				)}
+				{isFormSubmitted && <Navigate to='/transactions' replace={true} />}
+			</div>
 		</div>
 	);
 }
