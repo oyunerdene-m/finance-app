@@ -52,14 +52,18 @@ export default function EditTransaction() {
 	if (editedTransaction === undefined || accounts.length <= 0) return <h1>Loading...</h1>;
 	if (isSubmitted) return <Navigate to='/' />;
 	return (
-		<div style={{ border: '1px solid blue' }}>
-			<TransactionButtons transactionType={editedTransaction.type} onType={typeSelectHandler} />
-			<TransactionForm
-				type={editedTransaction.type}
-				onFormSubmit={submitHandler}
-				onChange={changeHandler}
-				formData={editedTransaction}
-			/>
+		<div style={{ border: '1px solid yellow' }} className='w-full flex  justify-center'>
+			<div style={{ border: '1px solid blue' }}>
+				<h3>Edit transaction:</h3>
+
+				<TransactionButtons transactionType={editedTransaction.type} onType={typeSelectHandler} />
+				<TransactionForm
+					type={editedTransaction.type}
+					onFormSubmit={submitHandler}
+					onChange={changeHandler}
+					formData={editedTransaction}
+				/>
+			</div>
 		</div>
 	);
 }
