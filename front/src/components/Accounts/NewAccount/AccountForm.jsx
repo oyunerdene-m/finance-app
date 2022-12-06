@@ -79,7 +79,7 @@ export default function AccountForm({ onChangeInput, onSubmitForm, accountData, 
 					</select>
 				</div>
 				<div>
-					<label className=' text-gray-700 text-sm font-bold mb-2 mr-3' htmlFor='currency'>
+					<label className='text-gray-700 text-sm font-bold mb-2 mr-3' htmlFor='currency'>
 						Currency:
 					</label>
 					<select

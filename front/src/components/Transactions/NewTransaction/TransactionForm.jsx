@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import AccountsContext from '../../../context/accounts-context';
 import { categories } from '../../../lib/transactionCategories';
 import { Link } from 'react-router-dom';
+import Button from '../../UI/Button';
 
 export default function TransactionForm({ type, onFormSubmit, onChange, formData }) {
 	const { accounts } = useContext(AccountsContext);
@@ -102,7 +103,7 @@ export default function TransactionForm({ type, onFormSubmit, onChange, formData
 		}
 	}
 	return (
-		<div style={{ border: '1px solid purple' }} className='w-full max-w-xs'>
+		<div style={{ border: '1px solid purple' }} className='w-full max-w-xs text-left'>
 			<form
 				className='bg-white shadow-xl rounded px-8 pt-6 pb-8 mb-4'
 				onSubmit={(e) => onFormSubmit(e)}
@@ -169,15 +170,13 @@ export default function TransactionForm({ type, onFormSubmit, onChange, formData
 						id='description'
 					/>
 				</div>
-				<div>
-					<button>Save</button>
+				<div className='flex items-center justify-between'>
+					<Button name='Save' type='submit' />
+					<Link style={{ textDecoration: 'none', color: 'black' }} to='/transactions'>
+						<Button name='Cancel' type='button' />
+					</Link>
 				</div>
 			</form>
-			<button>
-				<Link style={{ textDecoration: 'none', color: 'black' }} to='/transactions'>
-					Cancel
-				</Link>
-			</button>
 		</div>
 	);
 }
