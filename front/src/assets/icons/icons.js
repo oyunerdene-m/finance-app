@@ -22,7 +22,7 @@ export const userIcon = (
 		viewBox='0 0 24 24'
 		strokeWidth={1.5}
 		stroke='currentColor'
-		className='w-5 h-5 mr-3'
+		className='w-5 h-5 mr-2'
 	>
 		<path
 			strokeLinecap='round'
