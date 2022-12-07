@@ -6,7 +6,7 @@ import AccountsContext from '../context/accounts-context';
 import Modal from '../components/UI/Modal';
 import Confirmation from '../components/UI/Confirmation';
 import fetchData from '../lib/fetchData';
-import AddIcon from '../components/UI/AddIcon';
+import { addIconWithBorder } from '../assets/icons/icons';
 
 export default function Accounts() {
 	const { accounts, setAccounts } = useContext(AccountsContext);
@@ -86,9 +86,7 @@ export default function Accounts() {
 					{isFormShow ? (
 						''
 					) : (
-						<button onClick={() => setIsFormShow(true)}>
-							<AddIcon />
-						</button>
+						<button onClick={() => setIsFormShow(true)}>{addIconWithBorder}</button>
 					)}
 				</div>
 				<AccountList
