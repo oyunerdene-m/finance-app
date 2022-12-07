@@ -25,16 +25,11 @@ export default function EditAccount({ account, onEditAccount, onCloseForm }) {
 	}
 
 	return (
-		// <Modal onCancel={onCancel}>
-
-		<div>
-			<AccountForm
-				onCloseForm={onCloseForm}
-				onChangeInput={changeHandler}
-				onSubmitForm={submitHandler}
-				accountData={editedAccount}
-			/>
-		</div>
-		// </Modal>
+		<AccountForm
+			onCloseForm={onCloseForm}
+			onChangeInput={changeHandler}
+			onSubmitForm={submitHandler}
+			accountData={editedAccount}
+		/>
 	);
 }

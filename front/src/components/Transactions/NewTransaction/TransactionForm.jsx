@@ -103,11 +103,8 @@ export default function TransactionForm({ type, onFormSubmit, onChange, formData
 		}
 	}
 	return (
-		<div style={{ border: '1px solid purple' }} className='w-full max-w-xs text-left'>
-			<form
-				className='bg-white shadow-xl rounded px-8 pt-6 pb-8 mb-4'
-				onSubmit={(e) => onFormSubmit(e)}
-			>
+		<div className='w-full text-left'>
+			<form className='bg-white shadow-xl rounded px-8 pt-6 pb-6' onSubmit={(e) => onFormSubmit(e)}>
 				<div className='mb-4'>
 					<label className='block text-sm font-bold mb-2' htmlFor='date'>
 						Date:{' '}
@@ -172,7 +169,7 @@ export default function TransactionForm({ type, onFormSubmit, onChange, formData
 				</div>
 				<div className='flex items-center justify-between'>
 					<Button name='Save' type='submit' />
-					<Link style={{ textDecoration: 'none', color: 'black' }} to='/transactions'>
+					<Link to='/transactions'>
 						<Button name='Cancel' type='button' />
 					</Link>
 				</div>

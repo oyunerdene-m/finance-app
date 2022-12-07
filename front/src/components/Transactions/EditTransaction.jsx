@@ -52,17 +52,18 @@ export default function EditTransaction() {
 	if (editedTransaction === undefined || accounts.length <= 0) return <h1>Loading...</h1>;
 	if (isSubmitted) return <Navigate to='/' />;
 	return (
-		<div style={{ border: '1px solid yellow' }} className='w-full flex  justify-center'>
-			<div style={{ border: '1px solid blue' }}>
-				<h3>Edit transaction:</h3>
-
-				<TransactionButtons transactionType={editedTransaction.type} onType={typeSelectHandler} />
-				<TransactionForm
-					type={editedTransaction.type}
-					onFormSubmit={submitHandler}
-					onChange={changeHandler}
-					formData={editedTransaction}
-				/>
+		<div className='py-4 w-full flex justify-center'>
+			<div className='w-full lg:w-3/5 pt-4'>
+				<h3 className='font-medium text-lg mb-2'>Edit transaction:</h3>
+				<div className='min-w-md shadow-xl rounded-md'>
+					<TransactionButtons transactionType={editedTransaction.type} onType={typeSelectHandler} />
+					<TransactionForm
+						type={editedTransaction.type}
+						onFormSubmit={submitHandler}
+						onChange={changeHandler}
+						formData={editedTransaction}
+					/>
+				</div>
 			</div>
 		</div>
 	);
