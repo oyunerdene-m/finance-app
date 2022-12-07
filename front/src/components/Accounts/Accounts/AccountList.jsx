@@ -2,7 +2,7 @@ import Account from './Account';
 
 export default function AccountList({ accounts, onEditing, onDelete, onDeleting }) {
 	return (
-		<ul style={{ display: 'flex', justifyContent: 'center' }}>
+		<ul className='grid grid-cols-1 xl:grid-cols-2 2xl:grid-cols-3'>
 			{accounts.map((account) => (
 				<Account
 					account={account}

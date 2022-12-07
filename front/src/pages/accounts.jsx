@@ -98,7 +98,7 @@ export default function Accounts() {
 			</div>
 			<br />
 
-			<div>
+			<div className='flex justify-center'>
 				{isFormShow && (
 					<CreateAccount onAddAccount={addAccountHandler} onCloseForm={closeHandler} />
 				)}

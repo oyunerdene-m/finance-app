@@ -30,11 +30,8 @@ function App() {
 
 	return (
 		<Router>
-			<div
-				style={{ border: '1px solid red' }}
-				className='container text-center flex p-5 font-poppins text-dark-blue bg-background-color flex-col md:flex-row lg:flex-row h-screen'
-			>
-				<div className='flex flex-col p-10 w-full xl:w-1/5' style={{ border: '1px solid green' }}>
+			<div className='container text-center flex p-5 font-poppins text-dark-blue bg-background-color flex-col md:flex-row lg:flex-row h-screen'>
+				<div className='flex flex-col p-10 w-full lg:w-2/6 xl:w-1/5 md:border-r-[1px] md:border-light-gray'>
 					<nav>
 						<ul>
 							{currentUser ? (
@@ -77,7 +74,7 @@ function App() {
 						</ul>
 					</nav>
 				</div>
-				<main className='w-full xl:w-2/5'>
+				<main className='w-full lg:w-3/6 xl:w-2/5'>
 					<Routes>
 						<Route
 							path='/'
@@ -98,7 +95,7 @@ function App() {
 						<Route path='/transactions/edit/:id' element={<EditTransaction />} />
 					</Routes>
 				</main>
-				<div style={{ border: '1px solid purple' }} className='w-full xl:w-2/5'></div>
+				<div className='w-full lg:w-1/6 xl:w-2/5 bg-stats-back rounded-md'></div>
 			</div>
 		</Router>
 	);

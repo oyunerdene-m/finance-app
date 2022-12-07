@@ -23,7 +23,7 @@ export default function Home({ currentUser }) {
 	return (
 		<>
 			{currentUser !== null ? (
-				<div style={{ border: '1px solid black' }} className='flex flex-col p-10 text-left'>
+				<div className='flex flex-col p-10 text-left'>
 					<div className='mb-5'>
 						<p className='mb-2'>Total balance</p>
 						<div className='text-xl'>
