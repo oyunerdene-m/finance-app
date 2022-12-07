@@ -1,6 +1,4 @@
-import classes from './AccountForm.module.css';
 import Button from '../../UI/Button';
-
 export default function AccountForm({ onChangeInput, onSubmitForm, accountData, onCloseForm }) {
 	const isEditing = accountData.name.length > 0;
 
@@ -10,7 +8,7 @@ export default function AccountForm({ onChangeInput, onSubmitForm, accountData, 
 				onSubmit={onSubmitForm}
 				className='relative bg-white shadow-2xl rounded px-8 pt-6 pb-8 mb-4'
 			>
-				<span onClick={onCloseForm} className={classes.close}>
+				<span onClick={onCloseForm}>
 					<svg
 						xmlns='http://www.w3.org/2000/svg'
 						fill='none'

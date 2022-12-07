@@ -32,9 +32,9 @@ function App() {
 		<Router>
 			<div
 				style={{ border: '1px solid red' }}
-				className='container text-center flex p-5 columns-auto font-poppins text-dark-blue bg-background-color'
+				className='container text-center flex p-5 font-poppins text-dark-blue bg-background-color flex-col md:flex-row lg:flex-row h-screen'
 			>
-				<div className='flex flex-col p-10' style={{ border: '1px solid green' }}>
+				<div className='flex flex-col p-10 w-full xl:w-1/5' style={{ border: '1px solid green' }}>
 					<nav>
 						<ul>
 							{currentUser ? (
@@ -77,25 +77,28 @@ function App() {
 						</ul>
 					</nav>
 				</div>
-				<Routes>
-					<Route
-						path='/'
-						element={
-							currentUser ? (
-								<Home currentUser={currentUser} />
-							) : (
-								<Login setCurrentUser={setCurrentUser} />
-							)
-						}
-					/>
-					<Route path='/signup' element={<Signup />} />
-					<Route path='/login' element={<Login setCurrentUser={setCurrentUser} />} />
+				<main className='w-full xl:w-2/5'>
+					<Routes>
+						<Route
+							path='/'
+							element={
+								currentUser ? (
+									<Home currentUser={currentUser} />
+								) : (
+									<Login setCurrentUser={setCurrentUser} />
+								)
+							}
+						/>
+						<Route path='/signup' element={<Signup />} />
+						<Route path='/login' element={<Login setCurrentUser={setCurrentUser} />} />
 
-					<Route path='/accounts' element={<Accounts />} />
-					<Route path='/transactions' element={<Transactions />} />
-					<Route path='/transactions/new' element={<NewTransaction />} />
-					<Route path='/transactions/edit/:id' element={<EditTransaction />} />
-				</Routes>
+						<Route path='/accounts' element={<Accounts />} />
+						<Route path='/transactions' element={<Transactions />} />
+						<Route path='/transactions/new' element={<NewTransaction />} />
+						<Route path='/transactions/edit/:id' element={<EditTransaction />} />
+					</Routes>
+				</main>
+				<div style={{ border: '1px solid purple' }} className='w-full xl:w-2/5'></div>
 			</div>
 		</Router>
 	);

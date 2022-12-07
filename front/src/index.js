@@ -9,7 +9,9 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<CurrentUserProvider>
 		<AccountsContextProvider>
-			<App />
+			<React.StrictMode>
+				<App />
+			</React.StrictMode>
 		</AccountsContextProvider>
 	</CurrentUserProvider>,
 );
