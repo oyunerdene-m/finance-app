@@ -3,11 +3,13 @@ import { Link } from 'react-router-dom';
 export default function TransactionItem(props) {
 	const { id, date, category, type, from, to, amount, description } = props.transaction;
 	return (
-		<li className='flex mb-2 p-2 rounded odd:bg-double-light-blue shadow-xl  items-center'>
+		<li className='flex mb-2 p-2 rounded odd:bg-double-light-blue shadow-xl items-center'>
 			<div className='text-left  w-3/12 '>
 				<p>{date}</p>
 				<p>{category}</p>
-				<p className='text-sm'>/{type}/</p>
+				<p className='text-sm font-medium'>
+					<i>{type}</i>
+				</p>
 			</div>
 			<div className='text-left  w-6/12 '>
 				{type === 'transfer' ? (

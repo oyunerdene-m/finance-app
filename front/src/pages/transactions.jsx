@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import TransactionList from '../components/Transactions/Transactions/TransactionList';
 import fetchData from '../lib/fetchData';
-import AddIcon from '../components/UI/AddIcon';
+import { addIconWithBorder } from '../assets/icons/icons';
 
 export default function Transactions() {
 	const [transactions, setTransactions] = useState([]);
@@ -24,10 +24,7 @@ export default function Transactions() {
 		<div>
 			<div className='flex justify-between mb-4'>
 				<h3>Last transactions</h3>
-				<Link to='/transactions/new'>
-					{' '}
-					<AddIcon />
-				</Link>
+				<Link to='/transactions/new'> {addIconWithBorder}</Link>
 			</div>
 			<TransactionList transactions={transactions} />
 		</div>
