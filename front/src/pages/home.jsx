@@ -19,7 +19,6 @@ export default function Home({ currentUser }) {
 			totalEur += parseInt(el.amount);
 		}
 	}
-
 	return (
 		<>
 			{currentUser !== null ? (
@@ -45,10 +44,10 @@ export default function Home({ currentUser }) {
 							<span>$1000</span>
 						</div>
 					</div>
-					<div className='pt-7 pb-7 border-b-[1px] border-light-gray'>
+					<div className='pt-7 pb-6 border-b-[1px] border-light-gray'>
 						<Accounts />
 					</div>
-					<div className='pt-7'>
+					<div className='pt-2'>
 						<Transactions />
 					</div>
 				</div>

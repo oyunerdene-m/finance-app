@@ -21,6 +21,8 @@ module.exports = {
 			'light-purple': '#50578b',
 			blue: '#4a5286',
 			'stats-back': '#efefef',
+			'dark-purple': '#4e5587',
+			'card-dark': '#151632',
 		},
 
 		extend: {},
