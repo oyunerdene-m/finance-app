@@ -45,7 +45,7 @@ function App() {
 									<div className='flex mb-7'>
 										{userIcon}
 										<li className='mr-2'>Hello, {currentUser.name}</li>
-										<li onClick={logoutHandler}>
+										<li className='font-medium italic' onClick={logoutHandler}>
 											<Link to='/'>Logout</Link>
 										</li>
 									</div>

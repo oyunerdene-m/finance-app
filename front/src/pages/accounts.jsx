@@ -80,7 +80,7 @@ export default function Accounts() {
 				</Modal>
 			)}
 
-			<div>
+			<div className='px-3 mb-3 pt-5'>
 				<div className='flex justify-between mb-4'>
 					<h3>Your Accounts</h3>
 					{isFormShow ? (
@@ -96,7 +96,6 @@ export default function Accounts() {
 					onDeleting={() => setIsDeleting(true)}
 				/>
 			</div>
-			<br />
 
 			<div className='flex justify-center'>
 				{isFormShow && (
