@@ -30,7 +30,7 @@ function App() {
 
 	return (
 		<Router>
-			<div className='container text-center flex p-5 font-poppins text-dark-blue bg-background-color flex-col md:flex-row lg:flex-row h-screen'>
+			<div className='container text-center flex p-5 font-poppins text-dark-blue bg-background-color flex-col md:flex-row lg:flex-row h-full'>
 				<div className='flex flex-col p-10 w-full lg:w-2/6 xl:w-1/5 md:border-r-[1px] md:border-light-gray'>
 					<nav>
 						<ul>
@@ -74,7 +74,7 @@ function App() {
 						</ul>
 					</nav>
 				</div>
-				<main className='w-full lg:w-3/6 xl:w-2/5'>
+				<main className='w-full lg:w-3/6 xl:w-2.5/5'>
 					<Routes>
 						<Route
 							path='/'
@@ -95,7 +95,7 @@ function App() {
 						<Route path='/transactions/edit/:id' element={<EditTransaction />} />
 					</Routes>
 				</main>
-				<div className='w-full lg:w-1/6 xl:w-2/5 bg-stats-back rounded-md'></div>
+				<div className='w-full lg:w-1/6 xl:w-1.5/5 bg-stats-back rounded-md'></div>
 			</div>
 		</Router>
 	);

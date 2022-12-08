@@ -5,7 +5,7 @@ export default function AccountForm({ onChangeInput, onSubmitForm, accountData, 
 	const isEditing = accountData.name.length > 0;
 
 	return (
-		<div class='w-full max-w-xs'>
+		<div className='w-full max-w-xs'>
 			<form
 				onSubmit={onSubmitForm}
 				className='relative bg-white shadow-2xl rounded px-8 pt-6 pb-8 mb-4'
