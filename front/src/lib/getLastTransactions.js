@@ -16,5 +16,18 @@ export default function getLastTransactions(transactions) {
 		return bDate - aDate;
 	});
 
-	return [transactions[0], transactions[1], transactions[2]];
+	const res = [];
+	let count = 0;
+	for (let el of transactions) {
+		if (el) {
+			res.push(el);
+			count++;
+			if (count === 3) {
+				break;
+			}
+		} else {
+			break;
+		}
+	}
+	return res;
 }
