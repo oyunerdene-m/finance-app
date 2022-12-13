@@ -23,7 +23,7 @@ export default function Transactions() {
 	}, []);
 
 	const last3Transactions = getLastTransactions([...transactions]);
-	if (last3Transactions.length === 0 || transactions.length === 0) return <h1>Loading...</h1>;
+	//if (last3Transactions.length === 0 || transactions.length === 0) return <h1>Loading...</h1>;
 	return (
 		<div className='px-3 pt-9'>
 			<div className='flex justify-between mb-4'>
@@ -31,7 +31,9 @@ export default function Transactions() {
 
 				<Link to='/transactions/new'> {addIconWithBorder}</Link>
 			</div>
-			{path === '/' ? (
+			{last3Transactions.length === 0 || transactions.length === 0 ? (
+				<h1>Loading...</h1>
+			) : path === '/' ? (
 				<TransactionList transactions={last3Transactions} />
 			) : (
 				<TransactionList transactions={transactions} />

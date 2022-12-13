@@ -89,12 +89,16 @@ export default function Accounts() {
 						<button onClick={() => setIsFormShow(true)}>{addIconWithBorder}</button>
 					)}
 				</div>
-				<AccountList
-					accounts={accounts}
-					onEditing={editingAccount}
-					onDelete={setDeletedAccountId}
-					onDeleting={() => setIsDeleting(true)}
-				/>
+				{accounts.length === 0 ? (
+					<h1>Loading...</h1>
+				) : (
+					<AccountList
+						accounts={accounts}
+						onEditing={editingAccount}
+						onDelete={setDeletedAccountId}
+						onDeleting={() => setIsDeleting(true)}
+					/>
+				)}
 			</div>
 
 			<div className='flex justify-center'>
