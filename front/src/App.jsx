@@ -26,6 +26,7 @@ function App() {
 		const res = await response.json();
 		console.log(res);
 		setCurrentUser('');
+		window.location.reload();
 	}
 
 	return (
