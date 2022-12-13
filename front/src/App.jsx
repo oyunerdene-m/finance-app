@@ -78,7 +78,7 @@ function App() {
 						</ul>
 					</nav>
 				</div>
-				<main className='w-full lg:w-3/6 xl:w-2.5/5'>
+				<main className='w-full lg:w-2.7/6 xl:w-3/5'>
 					<Routes>
 						<Route
 							path='/'
@@ -99,7 +99,7 @@ function App() {
 						<Route path='/transactions/edit/:id' element={<EditTransaction />} />
 					</Routes>
 				</main>
-				<div className='w-full lg:w-1/6 xl:w-1.5/5 bg-stats-back rounded-md'></div>
+				<div className='w-full lg:w-1.3/6 xl:w-1/5 bg-stats-back rounded-md'></div>
 			</div>
 		</Router>
 	);
