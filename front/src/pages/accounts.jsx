@@ -80,7 +80,7 @@ export default function Accounts() {
 				</Modal>
 			)}
 
-			<div className='px-3 mb-3 pt-5 max-h-54 overflow-y-scroll'>
+			<div className='px-3 mb-3 pt-5 max-h-56 overflow-y-scroll'>
 				<div className='flex justify-between mb-4'>
 					<h3>Your Accounts</h3>
 					{isFormShow ? (
