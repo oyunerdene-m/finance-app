@@ -16,18 +16,5 @@ export default function getLastTransactions(transactions) {
 		return bDate - aDate;
 	});
 
-	const res = [];
-	let count = 0;
-	for (let el of transactions) {
-		if (el) {
-			res.push(el);
-			count++;
-			if (count === 3) {
-				break;
-			}
-		} else {
-			break;
-		}
-	}
-	return res;
+	return transactions.slice(0, 3);
 }
