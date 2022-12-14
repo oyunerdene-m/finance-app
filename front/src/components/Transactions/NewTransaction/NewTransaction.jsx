@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import AccountsContext from '../../../context/accounts-context';
 import TransactionButtons from './TransactionButtons';
 import TransactionForm from './TransactionForm';
 import { Navigate } from 'react-router-dom';
 import fetchData from '../../../lib/fetchData';
 
 export default function NewTansaction() {
+	const { accounts, setAccounts } = useContext(AccountsContext);
 	const [transactionType, setTransactionType] = useState('income');
 	const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 	const [formData, setFormData] = useState({
@@ -46,6 +48,34 @@ export default function NewTansaction() {
 		}
 		setFormData({ date: '', type: '', from: '', to: '', category: '', amount: 0, description: '' });
 		setIsFormSubmitted(true);
+
+		setAccounts((prevAccounts) =>
+			prevAccounts.map((account) => {
+				if (formData.type === 'income' && account.name === formData.to) {
+					return {
+						...account,
+						amount: parseInt(account.amount) + parseInt(formData.amount),
+					};
+				} else if (formData.type === 'expense' && account.name === formData.from) {
+					return {
+						...account,
+						amount: parseInt(account.amount) - parseInt(formData.amount),
+					};
+				} else if (formData.type === 'transfer' && account.name === formData.to) {
+					return {
+						...account,
+						amount: parseInt(account.amount) + parseInt(formData.amount),
+					};
+				} else if (formData.type === 'transfer' && account.name === formData.from) {
+					return {
+						...account,
+						amount: parseInt(account.amount) - parseInt(formData.amount),
+					};
+				} else {
+					return account;
+				}
+			}),
+		);
 	}
 
 	return (
