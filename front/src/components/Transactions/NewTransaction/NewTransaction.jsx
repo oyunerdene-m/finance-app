@@ -6,7 +6,7 @@ import { Navigate } from 'react-router-dom';
 import fetchData from '../../../lib/fetchData';
 
 export default function NewTansaction() {
-	const { accounts, setAccounts } = useContext(AccountsContext);
+	const { setAccounts } = useContext(AccountsContext);
 	const [transactionType, setTransactionType] = useState('income');
 	const [isFormSubmitted, setIsFormSubmitted] = useState(false);
 	const [formData, setFormData] = useState({
