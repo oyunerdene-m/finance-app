@@ -25,9 +25,9 @@ export default function TransactionForm({ type, onFormSubmit, onChange, formData
 						<option value=''>Choose account</option>
 						{accounts.map((account) => (
 							<option key={account.id} value={account.name}>
-								<span>{account.name}</span>
+								{account.name}
 								&nbsp; &nbsp;
-								<span>{`/${account.amount} ${account.currency}/`}</span>
+								{`/${account.amount} ${account.currency}/`}
 							</option>
 						))}
 					</select>
@@ -46,9 +46,9 @@ export default function TransactionForm({ type, onFormSubmit, onChange, formData
 						<option value=''>Choose account</option>
 						{accounts.map((account) => (
 							<option key={account.id} value={account.name}>
-								<span>{account.name}</span>
+								{account.name}
 								&nbsp; &nbsp;
-								<span>{`/${account.amount} ${account.currency}/`}</span>
+								{`/${account.amount} ${account.currency}/`}
 							</option>
 						))}
 					</select>
@@ -74,9 +74,9 @@ export default function TransactionForm({ type, onFormSubmit, onChange, formData
 							? 'Loading...'
 							: accounts.map((account) => (
 									<option key={account.id} value={account.name}>
-										<span>{account.name}</span>
+										{account.name}
 										&nbsp; &nbsp;
-										<span>{`/${account.amount} ${account.currency}/`}</span>
+										{`/${account.amount} ${account.currency}/`}
 									</option>
 							  ))}
 					</select>
@@ -100,9 +100,9 @@ export default function TransactionForm({ type, onFormSubmit, onChange, formData
 							? 'Loading...'
 							: accounts.map((account) => (
 									<option key={account.id} value={account.name}>
-										<span>{account.name}</span>
+										{account.name}
 										&nbsp; &nbsp;
-										<span>{`/${account.amount} ${account.currency}/`}</span>
+										{`/${account.amount} ${account.currency}/`}
 									</option>
 							  ))}
 					</select>
@@ -151,7 +151,7 @@ export default function TransactionForm({ type, onFormSubmit, onChange, formData
 
 				<div className='mb-4'>
 					<label className='block text-sm font-bold mb-2' htmlFor='amount'>
-						Amount:{' '}
+						{type === 'transfer' ? 'Sending Amount:' : 'Amount:'}
 					</label>
 					<input
 						className='shadow appearance-none border rounded w-full py-2 px-3 text-light-blue leading-tight focus:outline-none focus:shadow-outline'
@@ -162,6 +162,22 @@ export default function TransactionForm({ type, onFormSubmit, onChange, formData
 						id='amount'
 					/>
 				</div>
+				{type === 'transfer' && (
+					<div className='mb-4'>
+						<label className='block text-sm font-bold mb-2' htmlFor='receive'>
+							Receiving Amount:
+						</label>
+						<input
+							className='shadow appearance-none border rounded w-full py-2 px-3 text-light-blue leading-tight focus:outline-none focus:shadow-outline'
+							value={formData.receive}
+							onChange={onChange}
+							type='number'
+							name='receive'
+							id='receive'
+						/>
+					</div>
+				)}
+
 				<div>
 					<label className='block text-sm font-bold mb-2' htmlFor='description'>
 						Description:{' '}

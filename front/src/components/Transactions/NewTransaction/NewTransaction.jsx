@@ -16,6 +16,7 @@ export default function NewTansaction() {
 		to: '',
 		category: '',
 		amount: 0,
+		receive: 0,
 		description: '',
 	});
 
@@ -46,7 +47,16 @@ export default function NewTansaction() {
 			console.error(error);
 			alert(error);
 		}
-		setFormData({ date: '', type: '', from: '', to: '', category: '', amount: 0, description: '' });
+		setFormData({
+			date: '',
+			type: '',
+			from: '',
+			to: '',
+			category: '',
+			amount: 0,
+			receive: 0,
+			description: '',
+		});
 		setIsFormSubmitted(true);
 
 		setAccounts((prevAccounts) =>
@@ -64,7 +74,7 @@ export default function NewTansaction() {
 				} else if (formData.type === 'transfer' && account.name === formData.to) {
 					return {
 						...account,
-						amount: parseInt(account.amount) + parseInt(formData.amount),
+						amount: parseInt(account.amount) + parseInt(formData.receive),
 					};
 				} else if (formData.type === 'transfer' && account.name === formData.from) {
 					return {
@@ -76,6 +86,7 @@ export default function NewTansaction() {
 				}
 			}),
 		);
+		console.log('formData', formData);
 	}
 
 	return (
