@@ -1,4 +1,8 @@
-export default function getLastTransactions(transactions) {
+export function getLastTransactions(transactions) {
+	return transactions.slice(0, 3);
+}
+
+export function getSortedTransactions(transactions) {
 	transactions.sort((a, b) => {
 		const first = a.date.indexOf('-');
 		const second = a.date.lastIndexOf('-');
@@ -16,5 +20,5 @@ export default function getLastTransactions(transactions) {
 		return bDate - aDate;
 	});
 
-	return transactions.slice(0, 3);
+	return transactions;
 }
