@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import TransactionList from '../components/Transactions/Transactions/TransactionList';
 import fetchData from '../lib/fetchData';
 import { addIconWithBorder } from '../assets/icons/icons';
-import getLastTransactions from '../lib/getLastTransactions';
+import { getLastTransactions, getSortedTransactions } from '../lib/getLastTransactions';
 
 export default function Transactions() {
 	const [transactions, setTransactions] = useState([]);
@@ -22,7 +22,9 @@ export default function Transactions() {
 		getTransactions();
 	}, []);
 
-	const last3Transactions = getLastTransactions([...transactions]);
+	const sortedTransactions = getSortedTransactions([...transactions]);
+	const last3Transactions = getLastTransactions([...sortedTransactions]);
+
 	return (
 		<div className='px-3 pt-9'>
 			<div className='flex justify-between mb-4'>
@@ -35,7 +37,7 @@ export default function Transactions() {
 			) : path === '/' ? (
 				<TransactionList transactions={last3Transactions} />
 			) : (
-				<TransactionList transactions={transactions} />
+				<TransactionList transactions={sortedTransactions} />
 			)}
 		</div>
 	);
