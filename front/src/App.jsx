@@ -78,7 +78,7 @@ function App() {
 						</ul>
 					</nav>
 				</div>
-				<main className='w-full lg:w-2.7/6 xl:w-3/5'>
+				<main className='w-full lg:w-2.7/6 xl:w-3/5 overflow-y-scroll'>
 					<Routes>
 						<Route
 							path='/'

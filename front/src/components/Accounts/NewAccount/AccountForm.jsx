@@ -80,9 +80,9 @@ export default function AccountForm({ onChangeInput, onSubmitForm, accountData, 
 						id='currency'
 					>
 						<option value=''>Choose currency</option>
-						<option value='€'>Euro</option>
-						<option value='$'>Dollar</option>
-						<option value='₮'>Tugrug</option>
+						<option value='€'>EUR</option>
+						<option value='$'>USD</option>
+						<option value='₮'>MNT</option>
 					</select>
 				</div>
 				<div className='flex items-center justify-between'>
