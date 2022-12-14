@@ -86,7 +86,6 @@ export default function NewTansaction() {
 				}
 			}),
 		);
-		console.log('formData', formData);
 	}
 
 	return (
