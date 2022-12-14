@@ -25,7 +25,9 @@ export default function TransactionForm({ type, onFormSubmit, onChange, formData
 						<option value=''>Choose account</option>
 						{accounts.map((account) => (
 							<option key={account.id} value={account.name}>
-								{account.name}
+								<span>{account.name}</span>
+								&nbsp; &nbsp;
+								<span>{`/${account.amount} ${account.currency}/`}</span>
 							</option>
 						))}
 					</select>
@@ -44,7 +46,9 @@ export default function TransactionForm({ type, onFormSubmit, onChange, formData
 						<option value=''>Choose account</option>
 						{accounts.map((account) => (
 							<option key={account.id} value={account.name}>
-								{account.name}
+								<span>{account.name}</span>
+								&nbsp; &nbsp;
+								<span>{`/${account.amount} ${account.currency}/`}</span>
 							</option>
 						))}
 					</select>
@@ -70,7 +74,9 @@ export default function TransactionForm({ type, onFormSubmit, onChange, formData
 							? 'Loading...'
 							: accounts.map((account) => (
 									<option key={account.id} value={account.name}>
-										{account.name}
+										<span>{account.name}</span>
+										&nbsp; &nbsp;
+										<span>{`/${account.amount} ${account.currency}/`}</span>
 									</option>
 							  ))}
 					</select>
@@ -94,7 +100,9 @@ export default function TransactionForm({ type, onFormSubmit, onChange, formData
 							? 'Loading...'
 							: accounts.map((account) => (
 									<option key={account.id} value={account.name}>
-										{account.name}
+										<span>{account.name}</span>
+										&nbsp; &nbsp;
+										<span>{`/${account.amount} ${account.currency}/`}</span>
 									</option>
 							  ))}
 					</select>
