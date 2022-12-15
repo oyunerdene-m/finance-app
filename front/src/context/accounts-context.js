@@ -1,11 +1,13 @@
-import { useState, useEffect, createContext } from 'react';
+import { useState, useEffect, createContext, useContext } from 'react';
 import fetchData from '../lib/fetchData';
+import CurrentUserContext from './currentUser-context';
 
 const AccountsContext = createContext({
 	accounts: [],
 });
 
 export const AccountsContextProvider = (props) => {
+	const { currentUser } = useContext(CurrentUserContext);
 	const [accounts, setAccounts] = useState([]);
 
 	useEffect(() => {
@@ -18,8 +20,10 @@ export const AccountsContextProvider = (props) => {
 				alert(error);
 			}
 		}
-		getAccounts();
-	}, []);
+		if (currentUser) {
+			getAccounts();
+		}
+	}, [currentUser]);
 
 	return (
 		<AccountsContext.Provider value={{ accounts, setAccounts }}>

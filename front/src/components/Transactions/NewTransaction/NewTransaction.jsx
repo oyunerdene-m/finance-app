@@ -102,7 +102,7 @@ export default function NewTansaction() {
 							formData={formData}
 						/>
 					)}
-					{isFormSubmitted && <Navigate to='/transactions' replace={true} />}
+					{isFormSubmitted && <Navigate to='/' replace={true} />}
 				</div>
 			</div>
 		</div>
