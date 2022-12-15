@@ -22,7 +22,7 @@ export default function TransactionForm({ type, onFormSubmit, onChange, formData
 						name='from'
 						id='from'
 					>
-						<option value=''>Choose account</option>
+						<option value=''>--Choose account--</option>
 						{accounts.map((account) => (
 							<option key={account.id} value={account.name}>
 								{account.name}
@@ -43,7 +43,7 @@ export default function TransactionForm({ type, onFormSubmit, onChange, formData
 						name='to'
 						id='to'
 					>
-						<option value=''>Choose account</option>
+						<option value=''>--Choose account--</option>
 						{accounts.map((account) => (
 							<option key={account.id} value={account.name}>
 								{account.name}
@@ -69,7 +69,7 @@ export default function TransactionForm({ type, onFormSubmit, onChange, formData
 						name='to'
 						id='to'
 					>
-						<option value=''>Choose account</option>
+						<option value=''>--Choose account--</option>
 						{accounts.length <= 0
 							? 'Loading...'
 							: accounts.map((account) => (
@@ -95,7 +95,7 @@ export default function TransactionForm({ type, onFormSubmit, onChange, formData
 						name='from'
 						id='from'
 					>
-						<option value=''>Choose account</option>
+						<option value=''>--Choose account--</option>
 						{accounts.length <= 0
 							? 'Loading...'
 							: accounts.map((account) => (
@@ -139,7 +139,7 @@ export default function TransactionForm({ type, onFormSubmit, onChange, formData
 							name='category'
 							id='category'
 						>
-							<option value=''>Choose category</option>
+							<option value=''>--Choose category--</option>
 							{categories[type].map((category) => (
 								<option key={category} value={category}>
 									{category}
