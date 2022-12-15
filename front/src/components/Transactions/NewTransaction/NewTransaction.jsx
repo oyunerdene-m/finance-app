@@ -21,11 +21,7 @@ export default function NewTansaction() {
 	});
 
 	function clickHandler(type) {
-		if (type === transactionType) {
-			setTransactionType('');
-		} else {
-			setTransactionType(type);
-		}
+		setTransactionType(type);
 	}
 
 	function changeHandler(e) {
@@ -38,7 +34,6 @@ export default function NewTansaction() {
 			};
 		});
 	}
-
 	async function submitHandler(e) {
 		e.preventDefault();
 		try {

@@ -61,7 +61,7 @@ export default function AccountForm({ onChangeInput, onSubmitForm, accountData, 
 						Type:
 					</label>
 					<select value={accountData.type} onChange={onChangeInput} name='type' id='type'>
-						<option value=''>Choose type</option>
+						<option value=''>--Choose type--</option>
 						<option value='cash'>Cash</option>
 						<option value='card'>Card</option>
 						<option value='savings'>Savings</option>
@@ -79,7 +79,7 @@ export default function AccountForm({ onChangeInput, onSubmitForm, accountData, 
 						name='currency'
 						id='currency'
 					>
-						<option value=''>Choose currency</option>
+						<option value=''>--Choose currency--</option>
 						<option value='€'>EUR</option>
 						<option value='$'>USD</option>
 						<option value='₮'>MNT</option>
