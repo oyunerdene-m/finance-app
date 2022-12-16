@@ -7,6 +7,7 @@ import fetchData from '../lib/fetchData';
 import { getTotalIncome, getTotalExpense, getBalance } from '../lib/getStats';
 
 export default function Home({ currentUser }) {
+	console.log('currentUser', currentUser);
 	const { accounts } = useContext(AccountsContext);
 	const [transactions, setTransactions] = useState([]);
 
@@ -26,7 +27,7 @@ export default function Home({ currentUser }) {
 	const totalIncome = getTotalIncome(transactions);
 	const totalExpense = getTotalExpense(transactions);
 	const balance = getBalance(accounts);
-
+	if (currentUser === null) return <Login />;
 	return (
 		<>
 			{currentUser !== null ? (

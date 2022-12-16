@@ -25,7 +25,7 @@ function App() {
 		const response = await fetch('/api/v1/users/logout');
 		const res = await response.json();
 		console.log(res);
-		setCurrentUser('');
+		setCurrentUser(null);
 		window.location.reload();
 	}
 
@@ -80,16 +80,7 @@ function App() {
 				</div>
 				<main className='w-full lg:w-2.7/6 xl:w-3/5 overflow-y-scroll'>
 					<Routes>
-						<Route
-							path='/'
-							element={
-								currentUser ? (
-									<Home currentUser={currentUser} />
-								) : (
-									<Login setCurrentUser={setCurrentUser} />
-								)
-							}
-						/>
+						<Route path='/' element={<Home currentUser={currentUser} />} />
 						<Route path='/signup' element={<Signup />} />
 						<Route path='/login' element={<Login setCurrentUser={setCurrentUser} />} />
 
